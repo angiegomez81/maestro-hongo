@@ -189,6 +189,94 @@ a { color: inherit; text-decoration: none; }
 .btn-secondary:hover { border-color: var(--clay); color: var(--clay); }
 
 /* ============================================
+   Banner de slides (Home)
+   ============================================ */
+.banner-slider {
+  position: relative;
+  z-index: 5;
+  max-width: var(--max-width);
+  margin: 0 auto 80px;
+  padding: 0 24px;
+}
+
+.slider-frame {
+  position: relative;
+  height: 340px;
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.slide-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.slide-caption {
+  position: relative;
+  z-index: 2;
+  padding: 28px 32px;
+  max-width: 480px;
+}
+
+.slide-caption .eyebrow { margin-bottom: 10px; }
+
+.slide-caption h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.slide-caption p {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.slide-science .slide-art { background: linear-gradient(135deg, var(--surface), var(--bg)); }
+.slide-tradition .slide-art { background: linear-gradient(135deg, var(--bg), var(--surface)); }
+.slide-experience .slide-art { background: linear-gradient(135deg, var(--surface), var(--bg)); }
+
+.slider-dots {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.slider-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  border: 1px solid var(--ink-soft);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.slider-dot.active {
+  background: var(--moss);
+  border-color: var(--moss);
+}
+
+/* ============================================
    Tres caminos
    ============================================ */
 .paths {
