@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reducción de riesgos — Maestro Hongo</title>
+<meta name="description" content="Antes de explorar, aprende a reconocer los riesgos. La reducción de riesgos no elimina el riesgo, ayuda a comprenderlo.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-theme="light">
+
+<canvas id="mycelium"></canvas>
+
+<header class="site-header">
+  <a href="index.html" class="logo">MAESTRO HONGO</a>
+
+  <nav class="main-nav" data-i18n-nav>
+    <a href="quienes-somos.html" data-es="Quiénes somos" data-en="About us">Quiénes somos</a>
+    <a href="reduccion-riesgos.html" class="active" data-es="Reducción de riesgos" data-en="Harm reduction">Reducción de riesgos</a>
+    <a href="micelioteca.html" data-es="Micelioteca" data-en="Mycelioteca">Micelioteca</a>
+    <a href="comunidad.html" data-es="Comunidad" data-en="Community">Comunidad</a>
+    <a href="catalogo.html" data-es="Catálogo" data-en="Catalog">Catálogo</a>
+  </nav>
+
+  <div class="header-controls">
+    <button id="lang-toggle" class="pill-btn" aria-label="Cambiar idioma">EN</button>
+    <button id="theme-toggle" class="pill-btn" aria-label="Cambiar tema">
+      <span class="theme-icon">●</span>
+    </button>
+    <a href="#" class="login-link" data-es="Iniciar sesión" data-en="Log in">Iniciar sesión</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <p class="eyebrow" data-es="Antes de explorar" data-en="Before exploring">Antes de explorar</p>
+    <h1 data-es="Antes de explorar, aprende a reconocer los riesgos." data-en="Before exploring, learn to recognize the risks.">Antes de explorar, aprende a reconocer los riesgos.</h1>
+    <p class="page-sub" data-es="La reducción de riesgos no elimina el riesgo. Ayuda a comprenderlo." data-en="Harm reduction does not eliminate risk. It helps you understand it.">La reducción de riesgos no elimina el riesgo. Ayuda a comprenderlo.</p>
+  </section>
+
+  <nav class="toc">
+    <a href="#politicas" data-es="Políticas" data-en="Policies">Políticas</a>
+    <a href="#herramientas" data-es="Herramientas" data-en="Tools">Herramientas</a>
+    <a href="#basicos" data-es="Básicos y fundamentales" data-en="Basics and fundamentals">Básicos y fundamentales</a>
+    <a href="#articulos" data-es="Artículos relacionados" data-en="Related articles">Artículos relacionados</a>
+  </nav>
+
+  <section class="content-section" id="politicas">
+    <p class="eyebrow" data-es="01 — Políticas" data-en="01 — Policies">01 — Políticas</p>
+    <h2 data-es="Nuestro enfoque de reducción de riesgos" data-en="Our harm reduction approach">Nuestro enfoque de reducción de riesgos</h2>
+    <p data-es="No diagnosticamos ni declaramos que una persona está apta para consumir. Nuestro rol es informar con evidencia, señalar contraindicaciones conocidas y remitir a apoyo profesional cuando corresponde." data-en="We do not diagnose or declare that a person is fit to consume. Our role is to inform with evidence, flag known contraindications, and refer to professional support when appropriate.">No diagnosticamos ni declaramos que una persona está apta para consumir. Nuestro rol es informar con evidencia, señalar contraindicaciones conocidas y remitir a apoyo profesional cuando corresponde.</p>
+  </section>
+
+  <section class="content-section" id="herramientas">
+    <p class="eyebrow" data-es="02 — Herramientas" data-en="02 — Tools">02 — Herramientas</p>
+    <h2 data-es="Antes, durante y después" data-en="Before, during and after">Antes, durante y después</h2>
+    <div class="content-grid">
+      <div class="content-grid-item">
+        <h3 data-es="Antes" data-en="Before">Antes</h3>
+        <p data-es="Preparación · contexto · salud · medicación · intención." data-en="Preparation · setting · health · medication · intention.">Preparación · contexto · salud · medicación · intención.</p>
+      </div>
+      <div class="content-grid-item">
+        <h3 data-es="Durante" data-en="During">Durante</h3>
+        <p data-es="Entorno · acompañamiento · señales de alarma." data-en="Environment · companionship · warning signs.">Entorno · acompañamiento · señales de alarma.</p>
+      </div>
+      <div class="content-grid-item">
+        <h3 data-es="Después" data-en="After">Después</h3>
+        <p data-es="Integración · observación · apoyo profesional." data-en="Integration · observation · professional support.">Integración · observación · apoyo profesional.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section" id="basicos">
+    <p class="eyebrow" data-es="03 — Básicos y fundamentales" data-en="03 — Basics and fundamentals">03 — Básicos y fundamentales</p>
+    <h2 data-es="Lo mínimo que deberías saber" data-en="The minimum you should know">Lo mínimo que deberías saber</h2>
+    <p data-es="Esta sección reunirá contraindicaciones conocidas, interacciones con medicamentos, y señales de que una experiencia requiere atención profesional." data-en="This section will gather known contraindications, medication interactions, and signs that an experience requires professional attention.">Esta sección reunirá contraindicaciones conocidas, interacciones con medicamentos, y señales de que una experiencia requiere atención profesional.</p>
+  </section>
+
+  <section class="content-section" id="articulos">
+    <p class="eyebrow" data-es="04 — Artículos relacionados" data-en="04 — Related articles">04 — Artículos relacionados</p>
+    <h2 data-es="Próximamente en la Micelioteca" data-en="Coming soon in the Mycelioteca">Próximamente en la Micelioteca</h2>
+    <p data-es="Los artículos de reducción de riesgos se irán enlazando aquí a medida que se publiquen en la Micelioteca." data-en="Harm reduction articles will be linked here as they get published in the Mycelioteca.">Los artículos de reducción de riesgos se irán enlazando aquí a medida que se publiquen en la Micelioteca.</p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p data-es="Maestro Hongo — Educación, investigación y divulgación responsable." data-en="Maestro Hongo — Education, research and responsible outreach.">Maestro Hongo — Educación, investigación y divulgación responsable.</p>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

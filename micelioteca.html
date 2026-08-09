@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Micelioteca — Maestro Hongo</title>
+<meta name="description" content="Un archivo académico contemporáneo sobre hongos: historia, ciencia, ancestralidad, psiconáutica y genética.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-theme="light">
+
+<canvas id="mycelium"></canvas>
+
+<header class="site-header">
+  <a href="index.html" class="logo">MAESTRO HONGO</a>
+
+  <nav class="main-nav" data-i18n-nav>
+    <a href="quienes-somos.html" data-es="Quiénes somos" data-en="About us">Quiénes somos</a>
+    <a href="reduccion-riesgos.html" data-es="Reducción de riesgos" data-en="Harm reduction">Reducción de riesgos</a>
+    <a href="micelioteca.html" class="active" data-es="Micelioteca" data-en="Mycelioteca">Micelioteca</a>
+    <a href="comunidad.html" data-es="Comunidad" data-en="Community">Comunidad</a>
+    <a href="catalogo.html" data-es="Catálogo" data-en="Catalog">Catálogo</a>
+  </nav>
+
+  <div class="header-controls">
+    <button id="lang-toggle" class="pill-btn" aria-label="Cambiar idioma">EN</button>
+    <button id="theme-toggle" class="pill-btn" aria-label="Cambiar tema">
+      <span class="theme-icon">●</span>
+    </button>
+    <a href="#" class="login-link" data-es="Iniciar sesión" data-en="Log in">Iniciar sesión</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <p class="eyebrow" data-es="Instituto · Biblioteca · Archivo" data-en="Institute · Library · Archive">Instituto · Biblioteca · Archivo</p>
+    <h1 data-es="Micelioteca" data-en="Mycelioteca">Micelioteca</h1>
+    <p class="page-sub" data-es="Un archivo académico contemporáneo: ciencia, tradición y experiencia, organizados para explorar con criterio." data-en="A contemporary academic archive: science, tradition and experience, organized for critical exploration.">Un archivo académico contemporáneo: ciencia, tradición y experiencia, organizados para explorar con criterio.</p>
+  </section>
+
+  <nav class="toc">
+    <a href="#historia" data-es="Historia" data-en="History">Historia</a>
+    <a href="#ciencia" data-es="Ciencia" data-en="Science">Ciencia</a>
+    <a href="#ancestralidad" data-es="Ancestralidad" data-en="Ancestral knowledge">Ancestralidad</a>
+    <a href="#psiconautica" data-es="Psiconáutica" data-en="Psychonautics">Psiconáutica</a>
+    <a href="#geneticas" data-es="Genéticas" data-en="Genetics">Genéticas</a>
+    <a href="#biblioteca" data-es="Biblioteca (recursos gratis)" data-en="Library (free resources)">Biblioteca (recursos gratis)</a>
+  </nav>
+
+  <section class="content-section" id="historia">
+    <span class="tag" data-es="Conocimiento tradicional" data-en="Traditional knowledge">Conocimiento tradicional</span>
+    <p class="eyebrow" data-es="01 — Historia" data-en="01 — History">01 — Historia</p>
+    <h2 data-es="El lugar de los hongos en la historia humana" data-en="The place of fungi in human history">El lugar de los hongos en la historia humana</h2>
+    <p data-es="Desde su uso documentado en culturas mesoamericanas hasta su llegada a la ciencia occidental en el siglo XX. Contenido en construcción." data-en="From documented use in Mesoamerican cultures to their arrival in Western science in the 20th century. Content in progress.">Desde su uso documentado en culturas mesoamericanas hasta su llegada a la ciencia occidental en el siglo XX. Contenido en construcción.</p>
+  </section>
+
+  <section class="content-section" id="ciencia">
+    <span class="tag" data-es="Evidencia clínica" data-en="Clinical evidence">Evidencia clínica</span>
+    <p class="eyebrow" data-es="02 — Ciencia" data-en="02 — Science">02 — Ciencia</p>
+    <h2 data-es="Neurociencia, psicología y micología" data-en="Neuroscience, psychology and mycology">Neurociencia, psicología y micología</h2>
+    <p data-es="Artículos revisados sobre mecanismos de acción, investigación clínica en curso y hallazgos de micología aplicada. Contenido en construcción." data-en="Reviewed articles on mechanisms of action, ongoing clinical research and applied mycology findings. Content in progress.">Artículos revisados sobre mecanismos de acción, investigación clínica en curso y hallazgos de micología aplicada. Contenido en construcción.</p>
+  </section>
+
+  <section class="content-section" id="ancestralidad">
+    <span class="tag" data-es="Conocimiento tradicional" data-en="Traditional knowledge">Conocimiento tradicional</span>
+    <p class="eyebrow" data-es="03 — Ancestralidad" data-en="03 — Ancestral knowledge">03 — Ancestralidad</p>
+    <h2 data-es="Saberes indígenas y prácticas tradicionales" data-en="Indigenous knowledge and traditional practices">Saberes indígenas y prácticas tradicionales</h2>
+    <p data-es="Documentación antropológica de prácticas ceremoniales y su contexto cultural, tratada con respeto y rigor. Contenido en construcción." data-en="Anthropological documentation of ceremonial practices and their cultural context, treated with respect and rigor. Content in progress.">Documentación antropológica de prácticas ceremoniales y su contexto cultural, tratada con respeto y rigor. Contenido en construcción.</p>
+  </section>
+
+  <section class="content-section" id="psiconautica">
+    <span class="tag" data-es="Fenomenología" data-en="Phenomenology">Fenomenología</span>
+    <p class="eyebrow" data-es="04 — Psiconáutica" data-en="04 — Psychonautics">04 — Psiconáutica</p>
+    <h2 data-es="Fenomenología de los estados ampliados de conciencia" data-en="Phenomenology of expanded states of consciousness">Fenomenología de los estados ampliados de conciencia</h2>
+    <p data-es="Marcos conceptuales para describir y comprender la experiencia subjetiva, sin caer en el sensacionalismo. Contenido en construcción." data-en="Conceptual frameworks for describing and understanding subjective experience, without sensationalism. Content in progress.">Marcos conceptuales para describir y comprender la experiencia subjetiva, sin caer en el sensacionalismo. Contenido en construcción.</p>
+  </section>
+
+  <section class="content-section" id="geneticas">
+    <span class="tag" data-es="Investigación preclínica" data-en="Preclinical research">Investigación preclínica</span>
+    <p class="eyebrow" data-es="05 — Genéticas" data-en="05 — Genetics">05 — Genéticas</p>
+    <h2 data-es="Micología aplicada y variedades" data-en="Applied mycology and strains">Micología aplicada y variedades</h2>
+    <p data-es="Información sobre especies, variedades y su clasificación micológica, con fines exclusivamente educativos. Contenido en construcción." data-en="Information on species, strains and their mycological classification, for educational purposes only. Content in progress.">Información sobre especies, variedades y su clasificación micológica, con fines exclusivamente educativos. Contenido en construcción.</p>
+  </section>
+
+  <section class="content-section" id="biblioteca">
+    <p class="eyebrow" data-es="06 — Biblioteca (recursos gratis)" data-en="06 — Library (free resources)">06 — Biblioteca (recursos gratis)</p>
+    <h2 data-es="Archivo abierto de recursos" data-en="Open resource archive">Archivo abierto de recursos</h2>
+    <p data-es="Artículos, libros, documentales, ensayos y podcasts, filtrables por tema, tipo de contenido, año y nivel de evidencia. Contenido en construcción." data-en="Articles, books, documentaries, essays and podcasts, filterable by topic, content type, year and evidence level. Content in progress.">Artículos, libros, documentales, ensayos y podcasts, filtrables por tema, tipo de contenido, año y nivel de evidencia. Contenido en construcción.</p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p data-es="Maestro Hongo — Educación, investigación y divulgación responsable." data-en="Maestro Hongo — Education, research and responsible outreach.">Maestro Hongo — Educación, investigación y divulgación responsable.</p>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
