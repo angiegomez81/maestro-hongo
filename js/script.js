@@ -144,39 +144,3 @@ resize();
 initNodes();
 draw();
 
-/* ============================================
-   4) BANNER DE SLIDES (Home) — rotación cada 6s
-   ============================================ */
-const slider = document.querySelector('.banner-slider');
-
-if (slider) {
-  const slides = slider.querySelectorAll('.slide');
-  const dotsContainer = slider.querySelector('.slider-dots');
-  let current = 0;
-
-  slides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', `Slide ${i + 1}`);
-    dot.addEventListener('click', () => goToSlide(i));
-    dotsContainer.appendChild(dot);
-  });
-
-  const dots = dotsContainer.querySelectorAll('.slider-dot');
-
-  function goToSlide(index) {
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    current = index;
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
-  }
-
-  function nextSlide() {
-    goToSlide((current + 1) % slides.length);
-  }
-
-  if (!prefersReducedMotion) {
-    setInterval(nextSlide, 6000);
-  }
-}
