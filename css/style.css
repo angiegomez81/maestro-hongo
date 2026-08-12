@@ -189,6 +189,157 @@ a { color: inherit; text-decoration: none; }
 .btn-secondary:hover { border-color: var(--clay); color: var(--clay); }
 
 /* ============================================
+   Íconos de línea (badges circulares)
+   ============================================ */
+.icon-badge {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-badge svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--moss);
+  fill: none;
+  stroke-width: 1.4;
+}
+
+/* ============================================
+   Intro en dos columnas (Quiénes somos)
+   ============================================ */
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 56px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 800px) {
+  .intro-grid { grid-template-columns: 1fr; }
+}
+
+.dimensions-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  height: fit-content;
+}
+
+.icon-fact {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.icon-fact h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.icon-fact p {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-bottom: 0;
+}
+
+/* ============================================
+   Lista de manifiesto (declaraciones)
+   ============================================ */
+.manifesto-list {
+  margin-top: 32px;
+  border-top: 1px solid var(--line);
+}
+
+.manifesto-item {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.manifesto-item p {
+  margin-bottom: 0;
+  padding-top: 6px;
+}
+
+/* ============================================
+   Tarjetas de principios con ícono
+   ============================================ */
+.principle-icon-card .icon-badge {
+  margin-bottom: 16px;
+}
+
+/* ============================================
+   Paneles destacados (Misión / Visión)
+   ============================================ */
+.highlight-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 48px;
+}
+
+@media (max-width: 700px) {
+  .highlight-panel { padding: 32px 24px; }
+}
+
+.highlight-panel .pull-quote {
+  border-left-color: var(--clay);
+}
+
+.highlight-panel:nth-of-type(even) {
+  background: var(--bg);
+}
+
+/* ============================================
+   Banner de cierre
+   ============================================ */
+.closing-banner {
+  position: relative;
+  z-index: 5;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 48px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.closing-banner .eyebrow { color: var(--moss); }
+
+.closing-banner h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.5rem;
+  max-width: 34ch;
+}
+
+.closing-banner .btn-primary {
+  background: var(--bg);
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.closing-banner .btn-primary:hover {
+  background: var(--moss);
+  color: var(--bg);
+}
+
+/* ============================================
    Tres caminos
    ============================================ */
 .paths {
@@ -386,6 +537,18 @@ a { color: inherit; text-decoration: none; }
   padding: 4px 10px;
   border-radius: 999px;
   margin-bottom: 12px;
+}
+
+.pull-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: var(--ink);
+  max-width: 52ch;
+  padding-left: 24px;
+  border-left: 2px solid var(--moss);
+  margin: 28px 0;
 }
 
 /* ============================================
