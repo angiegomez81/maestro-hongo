@@ -406,6 +406,201 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ============================================
+   Panel de intro (icono + texto + callout)
+   ============================================ */
+.intro-panel {
+  position: relative;
+  z-index: 5;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 56px 24px;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--line);
+}
+
+@media (max-width: 800px) {
+  .intro-panel { flex-direction: column; }
+}
+
+.intro-mark {
+  width: 96px;
+  height: 96px;
+  min-width: 96px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-mark svg {
+  width: 40px;
+  height: 40px;
+  stroke: var(--moss);
+  fill: none;
+  stroke-width: 1.3;
+}
+
+.intro-panel h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-bottom: 14px;
+}
+
+.intro-panel .lead {
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+  max-width: 60ch;
+  margin-bottom: 24px;
+}
+
+.info-callout {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 20px 24px;
+  max-width: 60ch;
+}
+
+.info-callout .icon-badge {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+}
+
+.info-callout .icon-badge svg { width: 15px; height: 15px; }
+
+.info-callout p {
+  font-size: 0.92rem;
+  margin-bottom: 4px;
+}
+
+.info-callout p:last-child { margin-bottom: 0; }
+
+/* ============================================
+   Encabezado con divisores ("Explora nuestras áreas")
+   ============================================ */
+.divider-heading {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 40px 24px 0;
+}
+
+.divider-heading::before,
+.divider-heading::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.divider-heading span {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+/* ============================================
+   Tarjetas de áreas
+   ============================================ */
+.areas-grid {
+  position: relative;
+  z-index: 5;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 32px 24px 56px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.area-card {
+  border: 1px solid var(--line);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.area-card .icon-badge {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 18px;
+}
+
+.area-card .icon-badge svg { width: 24px; height: 24px; }
+
+.area-card h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.area-card p {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.area-card .btn-ghost {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid var(--line);
+  padding: 10px 16px;
+  text-align: center;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.area-card .btn-ghost:hover {
+  border-color: var(--moss);
+  color: var(--moss);
+}
+
+/* ============================================
+   Aviso final (disclaimer)
+   ============================================ */
+.disclaimer-box {
+  position: relative;
+  z-index: 5;
+  max-width: var(--max-width);
+  margin: 0 auto 56px;
+  padding: 24px 32px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.disclaimer-box .icon-badge {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+}
+
+.disclaimer-box .icon-badge svg { width: 15px; height: 15px; }
+
+.disclaimer-box p {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+
+.disclaimer-box p:last-child { margin-bottom: 0; }
+
+/* ============================================
    Encabezado de página interna
    ============================================ */
 .page-hero {
