@@ -6,119 +6,165 @@
 <title>Inventario · Maestro Hongo</title>
 <style>
   :root {
-    --bg: #EEF0E7;
-    --surface: #FFFFFF;
-    --surface-alt: #F7F5EE;
-    --ink: #1C2321;
-    --ink-muted: #6B7268;
-    --principal: #1F6F5C;
-    --principal-bg: #E4EFEA;
-    --secundario: #B5762C;
-    --secundario-bg: #F4E9D9;
-    --alert: #B3261E;
-    --alert-bg: #F8E4E1;
-    --alert-border: #E7B6AF;
-    --border: #DAD5C6;
-    --border-strong: #BDB6A2;
+    --bg: #EEF0E7; --surface: #FFFFFF; --surface-alt: #F7F5EE;
+    --ink: #1C2321; --ink-muted: #6B7268;
+    --principal: #1F6F5C; --principal-bg: #E4EFEA;
+    --secundario: #B5762C; --secundario-bg: #F4E9D9;
+    --alert: #B3261E; --alert-bg: #F8E4E1; --alert-border: #E7B6AF;
+    --ok: #2F7D4F; --ok-bg: #E3F0E7;
+    --border: #DAD5C6; --border-strong: #BDB6A2;
   }
   * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-  }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 24px 16px 60px; }
-  h1, h2, h3 { font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif; margin: 0; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 20px 14px 60px; }
+  h1,h2,h3 { font-family: "Iowan Old Style","Palatino Linotype",Georgia,serif; margin:0; }
   .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
-  .header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 20px; }
-  .header p { margin: 4px 0 0; font-size: 14px; color: var(--ink-muted); }
-  .icon-btn { border: 1px solid var(--border); background: var(--surface); border-radius: 999px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-muted); }
-  .icon-btn:hover { background: var(--surface-alt); }
-  .banner { padding: 10px 14px; border-radius: 6px; font-size: 14px; margin-bottom: 16px; }
-  .banner.error { background: var(--alert-bg); color: var(--alert); border: 1px solid var(--alert-border); }
-  .banner.alert { background: var(--alert-bg); border: 1px solid var(--alert-border); }
-  .banner.alert .title { display: flex; align-items: center; gap: 6px; color: var(--alert); font-weight: 600; margin-bottom: 2px; }
-  .controls { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin-bottom: 16px; }
-  .btn { border: none; cursor: pointer; border-radius: 6px; font-size: 14px; padding: 8px 14px; display: inline-flex; align-items: center; gap: 6px; }
-  .btn-primary { background: var(--principal); color: white; }
-  .btn-secondary { background: var(--secundario); color: white; }
-  .btn-outline { background: var(--surface); border: 1px solid var(--border); color: var(--ink); }
-  .btn-outline.active { border-color: var(--alert); color: var(--alert); }
-  .btn:disabled { opacity: .5; cursor: not-allowed; }
-  .empty { background: var(--surface-alt); border: 1px dashed var(--border-strong); border-radius: 6px; padding: 24px; text-align: center; font-size: 14px; color: var(--ink-muted); }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px; margin-bottom: 12px; }
-  .card.low { border-color: var(--alert-border); }
-  .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
-  .tag { font-size: 11px; padding: 2px 6px; border-radius: 4px; background: var(--surface-alt); color: var(--ink-muted); }
-  .tag.low { background: var(--alert-bg); color: var(--alert); display: inline-flex; align-items: center; gap: 4px; }
-  .card-actions button { background: none; border: none; cursor: pointer; padding: 6px; color: var(--ink-muted); }
-  .card-actions button.del { color: var(--alert); }
-  .stock-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
-  .stock-box { border-radius: 6px; padding: 8px 12px; }
-  .stock-box.principal { background: var(--principal-bg); }
-  .stock-box.secundario { background: var(--secundario-bg); }
-  .stock-box .lbl { font-size: 12px; }
-  .stock-box.principal .lbl { color: var(--principal); }
-  .stock-box.secundario .lbl { color: var(--secundario); }
-  .stock-box .val { font-size: 18px; }
-  .unit { font-size: 12px; color: var(--ink-muted); }
-  .row-actions { display: flex; gap: 8px; margin-top: 12px; }
-  .row-actions button { font-size: 12px; padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); cursor: pointer; display: inline-flex; align-items: center; gap: 5px; }
-  .movs { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-top: 8px; }
-  .mov-row { display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 14px; }
-  .mov-row .fecha { font-size: 12px; color: var(--ink-muted); white-space: nowrap; }
-  .mov-row .desc { flex: 1; }
-  .mov-row .badge { font-size: 11px; padding: 2px 6px; border-radius: 4px; white-space: nowrap; }
-  .footer-note { font-size: 12px; color: var(--ink-muted); text-align: center; margin-top: 32px; }
-  .overlay { position: fixed; inset: 0; background: rgba(28,35,33,.45); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 50; }
-  .overlay.show { display: flex; }
-  .modal { background: var(--surface); border-radius: 8px; padding: 20px; width: 100%; max-width: 380px; }
-  .modal-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-  .modal-top button { background: none; border: none; cursor: pointer; color: var(--ink-muted); }
-  .field { margin-bottom: 10px; }
-  .field label { font-size: 12px; color: var(--ink-muted); display: block; margin-bottom: 2px; }
-  .field input { width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; font-size: 14px; }
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .loc-toggle { display: flex; gap: 8px; margin-bottom: 10px; }
-  .loc-toggle button { flex: 1; padding: 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); cursor: pointer; font-size: 14px; }
-  .loc-toggle button.sel-principal { border-color: var(--principal); background: var(--principal-bg); color: var(--principal); }
-  .loc-toggle button.sel-secundario { border-color: var(--secundario); background: var(--secundario-bg); color: var(--secundario); }
-  svg { width: 14px; height: 14px; }
+  .header { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
+  .header p { margin:4px 0 0; font-size:13px; color:var(--ink-muted); }
+  .role-badge { display:flex; align-items:center; gap:8px; font-size:13px; }
+  .role-pill { padding:4px 10px; border-radius:999px; font-size:12px; }
+  .role-pill.principal { background:var(--principal-bg); color:var(--principal); }
+  .role-pill.secundario { background:var(--secundario-bg); color:var(--secundario); }
+  .link-btn { background:none; border:none; color:var(--ink-muted); text-decoration:underline; cursor:pointer; font-size:12px; padding:0; }
+  .icon-btn { border:1px solid var(--border); background:var(--surface); border-radius:999px; width:34px; height:34px; cursor:pointer; color:var(--ink-muted); }
+  .banner { padding:10px 14px; border-radius:6px; font-size:14px; margin-bottom:14px; }
+  .banner.error { background:var(--alert-bg); color:var(--alert); border:1px solid var(--alert-border); }
+  .banner.alert { background:var(--alert-bg); border:1px solid var(--alert-border); }
+  .banner.alert .title { display:flex; align-items:center; gap:6px; color:var(--alert); font-weight:600; margin-bottom:2px; }
+  .tabs { display:flex; gap:6px; margin-bottom:14px; border-bottom:1px solid var(--border); }
+  .tab { padding:8px 14px; font-size:14px; cursor:pointer; color:var(--ink-muted); border-bottom:2px solid transparent; }
+  .tab.active { color:var(--ink); border-color:var(--principal); font-weight:600; }
+  .controls { display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; margin-bottom:14px; }
+  .btn { border:none; cursor:pointer; border-radius:6px; font-size:14px; padding:8px 14px; display:inline-flex; align-items:center; gap:6px; }
+  .btn-primary { background:var(--principal); color:white; }
+  .btn-secondary { background:var(--secundario); color:white; }
+  .btn-outline { background:var(--surface); border:1px solid var(--border); color:var(--ink); }
+  .btn-outline.active { border-color:var(--alert); color:var(--alert); }
+  .btn:disabled { opacity:.45; cursor:not-allowed; }
+  .empty { background:var(--surface-alt); border:1px dashed var(--border-strong); border-radius:6px; padding:24px; text-align:center; font-size:14px; color:var(--ink-muted); }
+  table { width:100%; border-collapse:collapse; background:var(--surface); border:1px solid var(--border); border-radius:6px; overflow:hidden; font-size:13.5px; }
+  thead th { text-align:left; background:var(--surface-alt); color:var(--ink-muted); font-weight:600; font-size:12px; padding:8px 10px; border-bottom:1px solid var(--border); white-space:nowrap; }
+  tbody td { padding:8px 10px; border-bottom:1px solid var(--border); vertical-align:middle; }
+  tbody tr:last-child td { border-bottom:none; }
+  tbody tr.low { background: #FDF6F5; }
+  .tag { font-size:11px; padding:2px 6px; border-radius:4px; background:var(--surface-alt); color:var(--ink-muted); }
+  .tag.low { background:var(--alert-bg); color:var(--alert); }
+  .tag.pendiente { background:var(--secundario-bg); color:var(--secundario); }
+  .tag.entregado { background:var(--ok-bg); color:var(--ok); }
+  .row-btns { display:flex; gap:4px; flex-wrap:wrap; }
+  .row-btns button { font-size:11.5px; padding:4px 8px; border-radius:5px; border:1px solid var(--border); background:var(--surface); cursor:pointer; white-space:nowrap; }
+  .row-btns button.del { color:var(--alert); }
+  .row-btns button:disabled { opacity:.35; cursor:not-allowed; }
+  .table-scroll { overflow-x:auto; }
+  .pedido-card { background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:14px; margin-bottom:10px; }
+  .pedido-top { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; flex-wrap:wrap; }
+  .pedido-cliente { font-weight:600; }
+  .pedido-meta { font-size:12.5px; color:var(--ink-muted); margin-top:2px; }
+  .pedido-items { margin-top:8px; font-size:13px; }
+  .pedido-items div { padding:2px 0; }
+  .pedido-actions { margin-top:10px; display:flex; gap:8px; }
+  .footer-note { font-size:12px; color:var(--ink-muted); text-align:center; margin-top:28px; }
+  .overlay { position:fixed; inset:0; background:rgba(28,35,33,.5); display:none; align-items:center; justify-content:center; padding:16px; z-index:60; }
+  .overlay.show { display:flex; }
+  .modal { background:var(--surface); border-radius:8px; padding:20px; width:100%; max-width:420px; max-height:88vh; overflow-y:auto; }
+  .modal.wide { max-width:560px; }
+  .modal-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .modal-top button { background:none; border:none; cursor:pointer; color:var(--ink-muted); font-size:16px; }
+  .field { margin-bottom:10px; }
+  .field label { font-size:12px; color:var(--ink-muted); display:block; margin-bottom:2px; }
+  .field input, .field select { width:100%; border:1px solid var(--border); border-radius:6px; padding:8px 10px; font-size:14px; }
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .loc-toggle { display:flex; gap:8px; margin-bottom:10px; }
+  .loc-toggle button { flex:1; padding:8px; border-radius:6px; border:1px solid var(--border); background:var(--surface); cursor:pointer; font-size:14px; }
+  .loc-toggle button.sel-principal { border-color:var(--principal); background:var(--principal-bg); color:var(--principal); }
+  .loc-toggle button.sel-secundario { border-color:var(--secundario); background:var(--secundario-bg); color:var(--secundario); }
+  .role-choice { display:flex; flex-direction:column; gap:10px; }
+  .role-choice button { padding:14px; border-radius:8px; border:1px solid var(--border); background:var(--surface); font-size:15px; cursor:pointer; text-align:left; }
+  .item-row { display:grid; grid-template-columns: 2fr 1fr auto; gap:6px; align-items:end; margin-bottom:8px; }
+  .item-row button { border:1px solid var(--border); background:var(--surface); border-radius:6px; cursor:pointer; padding:8px; color:var(--alert); }
+  .add-item-btn { background:none; border:1px dashed var(--border-strong); border-radius:6px; padding:8px; width:100%; cursor:pointer; color:var(--ink-muted); font-size:13px; margin-bottom:10px; }
+  .pin-error { color:var(--alert); font-size:12px; margin-top:4px; display:none; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="header">
     <div>
-      <h1 style="font-size:26px;">Inventario compartido</h1>
+      <h1 style="font-size:24px;">Inventario compartido</h1>
       <p>Punto principal → segundo punto (entregas) · Maestro Hongo</p>
     </div>
-    <button class="icon-btn" id="btnRefresh" title="Actualizar">⟳</button>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="role-badge">
+        <span class="role-pill" id="rolePill"></span>
+        <button class="link-btn" id="btnCambiarRol">cambiar</button>
+      </div>
+      <button class="icon-btn" id="btnConfig" title="Configuración" style="display:none;">⚙</button>
+      <button class="icon-btn" id="btnRefresh" title="Actualizar">⟳</button>
+    </div>
   </div>
 
   <div id="errorBanner"></div>
   <div id="alertBanner"></div>
 
-  <div class="controls">
-    <button class="btn btn-outline" id="btnFiltro">Mostrar solo bajo stock</button>
-    <button class="btn btn-primary" id="btnAgregar">+ Producto</button>
+  <div class="tabs">
+    <div class="tab active" data-tab="productos" id="tabProductosBtn">Productos</div>
+    <div class="tab" data-tab="pedidos" id="tabPedidosBtn">Pedidos (ventas)</div>
   </div>
 
-  <div id="listaProductos"></div>
+  <!-- TAB PRODUCTOS -->
+  <div id="panelProductos">
+    <div class="controls">
+      <button class="btn btn-outline" id="btnFiltro">Mostrar solo bajo stock</button>
+      <button class="btn btn-primary" id="btnAgregar">+ Producto</button>
+    </div>
+    <div class="table-scroll">
+      <table id="tablaProductos"></table>
+    </div>
+  </div>
 
-  <div id="historial"></div>
+  <!-- TAB PEDIDOS -->
+  <div id="panelPedidos" style="display:none;">
+    <div class="controls">
+      <button class="btn btn-outline" id="btnFiltroPedidos">Mostrar solo pendientes</button>
+      <button class="btn btn-secondary" id="btnNuevoPedido">+ Nuevo pedido</button>
+    </div>
+    <div id="listaPedidos"></div>
+  </div>
 
   <p class="footer-note" id="statusNote">Conectando…</p>
 </div>
 
-<!-- Modal agregar/editar -->
+<!-- Overlay: elegir rol / PIN -->
+<div class="overlay" id="overlayRol">
+  <div class="modal">
+    <h3 style="font-size:18px;margin-bottom:12px;">¿Quién eres?</h3>
+    <div class="role-choice" id="roleChoiceButtons">
+      <button data-role="principal">🏢 Punto Principal</button>
+      <button data-role="secundario">📦 Segundo Punto</button>
+    </div>
+    <div id="pinStep" style="display:none;margin-top:14px;">
+      <div class="field"><label id="pinLabel">PIN</label><input id="pinInput" type="password" inputmode="numeric" /></div>
+      <div class="pin-error" id="pinError">PIN incorrecto, intenta de nuevo.</div>
+      <button class="btn btn-primary" id="btnConfirmarPin" style="width:100%;justify-content:center;margin-top:8px;">Entrar</button>
+      <button class="link-btn" id="btnVolverRol" style="margin-top:10px;">← elegir otro</button>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay: configuración de PINs -->
+<div class="overlay" id="overlayConfig">
+  <div class="modal">
+    <div class="modal-top"><h3 style="font-size:18px;">Configuración</h3><button onclick="cerrarModales()">✕</button></div>
+    <div class="field"><label>PIN de Punto Principal</label><input id="cfgPinPrincipal" /></div>
+    <div class="field"><label>PIN de Segundo Punto</label><input id="cfgPinSecundario" /></div>
+    <button class="btn btn-primary" id="btnGuardarConfig" style="width:100%;justify-content:center;">Guardar cambios</button>
+  </div>
+</div>
+
+<!-- Modal producto -->
 <div class="overlay" id="modalForm">
   <div class="modal">
-    <div class="modal-top">
-      <h3 id="formTitle" style="font-size:18px;">Nuevo producto</h3>
-      <button onclick="cerrarModales()">✕</button>
-    </div>
+    <div class="modal-top"><h3 id="formTitle" style="font-size:18px;">Nuevo producto</h3><button onclick="cerrarModales()">✕</button></div>
     <div class="field"><label>Nombre del producto</label><input id="fNombre" /></div>
     <div class="field"><label>SKU / referencia (opcional)</label><input id="fSku" /></div>
     <div class="two-col">
@@ -136,38 +182,44 @@
 <!-- Modal traslado -->
 <div class="overlay" id="modalTraslado">
   <div class="modal">
-    <div class="modal-top">
-      <h3 style="font-size:18px;">Trasladar</h3>
-      <button onclick="cerrarModales()">✕</button>
-    </div>
+    <div class="modal-top"><h3 style="font-size:18px;">Trasladar</h3><button onclick="cerrarModales()">✕</button></div>
     <p id="traspInfo" style="font-size:14px;color:var(--ink-muted);margin-top:0;"></p>
     <div class="field"><label>Cantidad a trasladar</label><input id="traspCantidad" type="number" min="1" /></div>
     <button class="btn btn-secondary" id="btnConfirmarTraslado" style="width:100%;justify-content:center;">Confirmar traslado</button>
   </div>
 </div>
 
-<!-- Modal venta -->
-<div class="overlay" id="modalVenta">
-  <div class="modal">
-    <div class="modal-top">
-      <h3 style="font-size:18px;">Registrar venta</h3>
-      <button onclick="cerrarModales()">✕</button>
+<!-- Modal nuevo pedido -->
+<div class="overlay" id="modalPedido">
+  <div class="modal wide">
+    <div class="modal-top"><h3 style="font-size:18px;">Nuevo pedido</h3><button onclick="cerrarModales()">✕</button></div>
+    <h3 style="font-size:13px;color:var(--ink-muted);margin-bottom:6px;">Datos del cliente</h3>
+    <div class="two-col">
+      <div class="field"><label>Nombre</label><input id="cNombre" /></div>
+      <div class="field"><label>No. Cédula</label><input id="cCedula" /></div>
     </div>
-    <p id="ventaNombre" style="font-size:14px;color:var(--ink-muted);margin-top:0;"></p>
-    <div class="loc-toggle">
-      <button id="btnLocPrincipal">Principal</button>
-      <button id="btnLocSecundario">Segundo punto</button>
+    <div class="two-col">
+      <div class="field"><label>Teléfono</label><input id="cTelefono" /></div>
+      <div class="field"><label>Ciudad</label><input id="cCiudad" /></div>
     </div>
-    <div class="field"><label>Cantidad vendida</label><input id="ventaCantidad" type="number" min="1" /></div>
-    <button class="btn btn-primary" id="btnConfirmarVenta" style="width:100%;justify-content:center;">Confirmar venta</button>
+    <div class="field"><label>Dirección</label><input id="cDireccion" /></div>
+    <div class="two-col">
+      <div class="field"><label>No. Casa/Apto</label><input id="cCasaApto" /></div>
+      <div class="field"><label>Nombre Unidad</label><input id="cUnidad" /></div>
+    </div>
+    <div class="field"><label>Barrio</label><input id="cBarrio" /></div>
+
+    <h3 style="font-size:13px;color:var(--ink-muted);margin:14px 0 6px;">Productos</h3>
+    <div id="itemsPedido"></div>
+    <button class="add-item-btn" id="btnAddItem">+ Agregar producto</button>
+
+    <button class="btn btn-secondary" id="btnGuardarPedido" style="width:100%;justify-content:center;">Registrar pedido</button>
   </div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-  getFirestore, doc, onSnapshot, setDoc, getDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, doc, onSnapshot, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDUAXEFVVvoIh4gvHvp0iD0QdLBZ-zOLus",
@@ -177,128 +229,221 @@ const firebaseConfig = {
   messagingSenderId: "617925076909",
   appId: "1:617925076909:web:22773a0d73d494a4f82324"
 };
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const ref = doc(db, "inventario", "principal");
+const dataRef = doc(db, "inventario", "principal");
+const configRef = doc(db, "inventario", "config");
 
 let productos = [];
+let pedidos = [];
 let movimientos = [];
+let config = { pinPrincipal: "1234", pinSecundario: "5678" };
 let soloBajoStock = false;
-let saleLoc = "principal";
+let soloPendientes = false;
+let currentTab = "productos";
+let rol = localStorage.getItem("inv_rol") || null;
 
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
-const fmtFecha = (iso) => {
-  const d = new Date(iso);
-  return d.toLocaleString("es-CO", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
-};
+const fmtFecha = (iso) => new Date(iso).toLocaleString("es-CO", { day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit" });
 const bajoStock = (p) => p.stockPrincipal <= p.umbral || p.stockSecundario <= p.umbral;
+const esPrincipal = () => rol === "principal";
+const esSecundario = () => rol === "secundario";
 
-async function guardar() {
+async function guardarData() {
   try {
-    await setDoc(ref, { productos, movimientos: movimientos.slice(0, 150) });
+    await setDoc(dataRef, { productos, pedidos, movimientos: movimientos.slice(0, 150) });
     document.getElementById("errorBanner").innerHTML = "";
   } catch (e) {
-    document.getElementById("errorBanner").innerHTML =
-      `<div class="banner error">No se pudo guardar el cambio. Revisa tu conexión e intenta de nuevo.</div>`;
+    document.getElementById("errorBanner").innerHTML = `<div class="banner error">No se pudo guardar el cambio. Revisa tu conexión e intenta de nuevo.</div>`;
   }
 }
 
-onSnapshot(ref, (snap) => {
-  if (snap.exists()) {
-    const data = snap.data();
-    productos = data.productos || [];
-    movimientos = data.movimientos || [];
-  } else {
-    productos = [];
-    movimientos = [];
-  }
-  document.getElementById("statusNote").textContent =
-    "Este inventario se sincroniza automáticamente entre todos los dispositivos que abran esta página.";
+onSnapshot(dataRef, (snap) => {
+  const data = snap.exists() ? snap.data() : {};
+  productos = data.productos || [];
+  pedidos = data.pedidos || [];
+  movimientos = data.movimientos || [];
+  document.getElementById("statusNote").textContent = "Este inventario se sincroniza automáticamente entre todos los dispositivos que abran esta página.";
   render();
 }, (err) => {
-  document.getElementById("errorBanner").innerHTML =
-    `<div class="banner error">Error de conexión con la base de datos: ${err.message}</div>`;
+  document.getElementById("errorBanner").innerHTML = `<div class="banner error">Error de conexión: ${err.message}</div>`;
 });
 
+onSnapshot(configRef, async (snap) => {
+  if (snap.exists()) {
+    config = snap.data();
+  } else {
+    await setDoc(configRef, config);
+  }
+});
+
+// ---------- ROL ----------
+function actualizarBadgeRol() {
+  const pill = document.getElementById("rolePill");
+  if (rol === "principal") { pill.textContent = "Punto Principal"; pill.className = "role-pill principal"; }
+  else if (rol === "secundario") { pill.textContent = "Segundo Punto"; pill.className = "role-pill secundario"; }
+  else { pill.textContent = "Sin rol"; pill.className = "role-pill"; }
+  document.getElementById("btnConfig").style.display = esPrincipal() ? "inline-flex" : "none";
+}
+
+function requerirRol() {
+  if (!rol) document.getElementById("overlayRol").classList.add("show");
+}
+
+let rolPendiente = null;
+document.querySelectorAll("#roleChoiceButtons button").forEach(btn => {
+  btn.onclick = () => {
+    rolPendiente = btn.dataset.role;
+    document.getElementById("pinStep").style.display = "block";
+    document.getElementById("pinLabel").textContent = rolPendiente === "principal" ? "PIN de Punto Principal" : "PIN de Segundo Punto";
+    document.getElementById("pinInput").value = "";
+    document.getElementById("pinError").style.display = "none";
+    document.getElementById("pinInput").focus();
+  };
+});
+document.getElementById("btnVolverRol").onclick = () => {
+  document.getElementById("pinStep").style.display = "none";
+  rolPendiente = null;
+};
+document.getElementById("btnConfirmarPin").onclick = () => {
+  const val = document.getElementById("pinInput").value;
+  const correcto = rolPendiente === "principal" ? config.pinPrincipal : config.pinSecundario;
+  if (val === correcto) {
+    rol = rolPendiente;
+    localStorage.setItem("inv_rol", rol);
+    document.getElementById("overlayRol").classList.remove("show");
+    actualizarBadgeRol();
+    render();
+  } else {
+    document.getElementById("pinError").style.display = "block";
+  }
+};
+document.getElementById("btnCambiarRol").onclick = () => {
+  rol = null;
+  localStorage.removeItem("inv_rol");
+  actualizarBadgeRol();
+  document.getElementById("pinStep").style.display = "none";
+  document.getElementById("overlayRol").classList.add("show");
+  render();
+};
+
+// ---------- CONFIG (solo principal) ----------
+document.getElementById("btnConfig").onclick = () => {
+  document.getElementById("cfgPinPrincipal").value = config.pinPrincipal;
+  document.getElementById("cfgPinSecundario").value = config.pinSecundario;
+  document.getElementById("overlayConfig").classList.add("show");
+};
+document.getElementById("btnGuardarConfig").onclick = async () => {
+  const p = document.getElementById("cfgPinPrincipal").value.trim();
+  const s = document.getElementById("cfgPinSecundario").value.trim();
+  if (!p || !s) return;
+  config = { pinPrincipal: p, pinSecundario: s };
+  await setDoc(configRef, config);
+  cerrarModales();
+};
+
+// ---------- TABS ----------
+document.getElementById("tabProductosBtn").onclick = () => setTab("productos");
+document.getElementById("tabPedidosBtn").onclick = () => setTab("pedidos");
+function setTab(t) {
+  currentTab = t;
+  document.getElementById("tabProductosBtn").classList.toggle("active", t === "productos");
+  document.getElementById("tabPedidosBtn").classList.toggle("active", t === "pedidos");
+  document.getElementById("panelProductos").style.display = t === "productos" ? "block" : "none";
+  document.getElementById("panelPedidos").style.display = t === "pedidos" ? "block" : "none";
+}
+
+// ---------- RENDER ----------
 function render() {
+  actualizarBadgeRol();
+  document.getElementById("btnAgregar").disabled = !esPrincipal();
+  document.getElementById("btnNuevoPedido").disabled = !esPrincipal();
+
   const alertas = productos.filter(bajoStock);
-  const alertBanner = document.getElementById("alertBanner");
-  alertBanner.innerHTML = alertas.length ? `
+  document.getElementById("alertBanner").innerHTML = alertas.length ? `
     <div class="banner alert">
       <div class="title">⚠ ${alertas.length} producto${alertas.length !== 1 ? "s" : ""} en bajo stock</div>
       <div>${alertas.map(a => a.nombre).join(" · ")}</div>
     </div>` : "";
 
-  const lista = soloBajoStock ? alertas : productos;
-  const cont = document.getElementById("listaProductos");
-  if (!lista.length) {
-    cont.innerHTML = `<div class="empty">${
-      productos.length === 0
-        ? "Todavía no hay productos. Agrega el primero con el botón de arriba."
-        : "Ningún producto está en bajo stock ahora mismo."
-    }</div>`;
-  } else {
-    cont.innerHTML = lista.map(p => {
-      const low = bajoStock(p);
-      return `
-      <div class="card ${low ? "low" : ""}">
-        <div class="card-top">
-          <div>
-            <strong>${p.nombre}</strong>
-            ${p.sku ? `<span class="tag mono">${p.sku}</span>` : ""}
-            ${low ? `<span class="tag low">⚠ bajo stock</span>` : ""}
-          </div>
-          <div class="card-actions">
-            <button title="Editar" onclick="abrirEditar('${p.id}')">✎</button>
-            <button title="Eliminar" class="del" onclick="eliminar('${p.id}')">🗑</button>
-          </div>
-        </div>
-        <div class="stock-grid">
-          <div class="stock-box principal">
-            <div class="lbl">Principal</div>
-            <div class="val mono">${p.stockPrincipal} <span class="unit">${p.unidad}</span></div>
-          </div>
-          <div class="stock-box secundario">
-            <div class="lbl">Segundo punto</div>
-            <div class="val mono">${p.stockSecundario} <span class="unit">${p.unidad}</span></div>
-          </div>
-        </div>
-        <div class="row-actions">
-          <button onclick="abrirTraslado('${p.id}')">⇄ Trasladar</button>
-          <button onclick="abrirVenta('${p.id}')">🛒 Registrar venta</button>
-        </div>
-      </div>`;
-    }).join("");
-  }
-
-  const hist = document.getElementById("historial");
-  if (movimientos.length) {
-    hist.innerHTML = `
-      <h2 style="font-size:14px;color:var(--ink-muted);margin:24px 0 8px;">Últimos movimientos</h2>
-      <div class="movs">
-        ${movimientos.slice(0, 15).map((m, i) => `
-          <div class="mov-row" style="background:${i % 2 === 0 ? "var(--surface)" : "var(--surface-alt)"};${i > 0 ? "border-top:1px solid var(--border);" : ""}">
-            <span class="fecha mono">${fmtFecha(m.fecha)}</span>
-            <span class="desc">${
-              m.tipo === "traslado"
-                ? `Traslado de <strong>${m.cantidad} ${m.unidad}</strong> de ${m.productoNombre} → segundo punto`
-                : `Venta de <strong>${m.cantidad} ${m.unidad}</strong> de ${m.productoNombre} en ${m.ubicacion === "principal" ? "principal" : "segundo punto"}`
-            }</span>
-            <span class="badge" style="background:${m.tipo === "traslado" ? "var(--secundario-bg)" : "var(--principal-bg)"};color:${m.tipo === "traslado" ? "var(--secundario)" : "var(--principal)"};">${m.tipo}</span>
-          </div>
-        `).join("")}
-      </div>`;
-  } else {
-    hist.innerHTML = "";
-  }
+  renderProductos();
+  renderPedidos();
 }
 
-// ---- Modal: agregar/editar ----
+function renderProductos() {
+  const lista = soloBajoStock ? productos.filter(bajoStock) : productos;
+  const tabla = document.getElementById("tablaProductos");
+  if (!lista.length) {
+    tabla.outerHTML = `<div class="empty" id="tablaProductos">${productos.length === 0 ? "Todavía no hay productos." : "Ningún producto está en bajo stock."}</div>`;
+    return;
+  }
+  if (tabla.tagName !== "TABLE") {
+    const t = document.createElement("table");
+    t.id = "tablaProductos";
+    tabla.replaceWith(t);
+  }
+  const t = document.getElementById("tablaProductos");
+  t.innerHTML = `
+    <thead><tr>
+      <th>Nombre</th><th>SKU</th><th>Unidad</th><th>Stock principal</th><th>Stock segundo</th><th>Alerta</th><th>Acciones</th>
+    </tr></thead>
+    <tbody>
+      ${lista.map(p => `
+        <tr class="${bajoStock(p) ? "low" : ""}">
+          <td>${p.nombre} ${bajoStock(p) ? '<span class="tag low">bajo stock</span>' : ""}</td>
+          <td class="mono">${p.sku || "—"}</td>
+          <td>${p.unidad}</td>
+          <td class="mono">${p.stockPrincipal}</td>
+          <td class="mono">${p.stockSecundario}</td>
+          <td class="mono">${p.umbral}</td>
+          <td>
+            <div class="row-btns">
+              <button onclick="abrirEditar('${p.id}')" ${esPrincipal() ? "" : "disabled"}>Editar</button>
+              <button onclick="abrirTraslado('${p.id}')" ${esPrincipal() ? "" : "disabled"}>Trasladar</button>
+              <button class="del" onclick="eliminar('${p.id}')" ${esPrincipal() ? "" : "disabled"}>Eliminar</button>
+            </div>
+          </td>
+        </tr>
+      `).join("")}
+    </tbody>`;
+}
+
+function renderPedidos() {
+  const lista = soloPendientes ? pedidos.filter(p => p.estado === "pendiente") : pedidos;
+  const cont = document.getElementById("listaPedidos");
+  if (!lista.length) {
+    cont.innerHTML = `<div class="empty">${pedidos.length === 0 ? "Todavía no hay pedidos registrados." : "No hay pedidos pendientes."}</div>`;
+    return;
+  }
+  const ordenados = [...lista].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+  cont.innerHTML = ordenados.map(pe => `
+    <div class="pedido-card">
+      <div class="pedido-top">
+        <div>
+          <div class="pedido-cliente">${pe.cliente.nombre} <span class="tag ${pe.estado}">${pe.estado}</span></div>
+          <div class="pedido-meta">${pe.cliente.telefono || "—"} · CC ${pe.cliente.cedula || "—"}</div>
+          <div class="pedido-meta">${pe.cliente.direccion || ""} ${pe.cliente.casaApto || ""} · ${pe.cliente.unidad || ""} · ${pe.cliente.barrio || ""}, ${pe.cliente.ciudad || ""}</div>
+          <div class="pedido-meta mono">${fmtFecha(pe.fecha)}${pe.fechaEntrega ? " · entregado " + fmtFecha(pe.fechaEntrega) : ""}</div>
+        </div>
+      </div>
+      <div class="pedido-items">
+        ${pe.items.map(it => `<div>• ${it.cantidad} ${it.unidad} — ${it.nombre}</div>`).join("")}
+      </div>
+      <div class="pedido-actions">
+        ${pe.estado === "pendiente"
+          ? `<button class="btn btn-primary" onclick="marcarEntregado('${pe.id}')" ${esSecundario() ? "" : "disabled"}>Marcar como entregado</button>
+             <button class="btn btn-outline" onclick="cancelarPedido('${pe.id}')" ${esPrincipal() ? "" : "disabled"}>Cancelar pedido</button>`
+          : ""}
+      </div>
+    </div>
+  `).join("");
+}
+
+// ---------- PRODUCTOS: agregar/editar ----------
 let editingId = null;
 window.abrirEditar = (id) => {
-  const p = productos.find(x => x.id === id);
-  if (!p) return;
+  if (!esPrincipal()) return;
+  const p = productos.find(x => x.id === id); if (!p) return;
   editingId = id;
   document.getElementById("formTitle").textContent = "Editar producto";
   document.getElementById("fNombre").value = p.nombre;
@@ -309,8 +454,8 @@ window.abrirEditar = (id) => {
   document.getElementById("fUnidad").value = p.unidad;
   document.getElementById("modalForm").classList.add("show");
 };
-
 document.getElementById("btnAgregar").onclick = () => {
+  if (!esPrincipal()) return;
   editingId = null;
   document.getElementById("formTitle").textContent = "Nuevo producto";
   ["fNombre","fSku"].forEach(id => document.getElementById(id).value = "");
@@ -320,8 +465,8 @@ document.getElementById("btnAgregar").onclick = () => {
   document.getElementById("fUnidad").value = "uds";
   document.getElementById("modalForm").classList.add("show");
 };
-
 document.getElementById("btnGuardarForm").onclick = () => {
+  if (!esPrincipal()) return;
   const nombre = document.getElementById("fNombre").value.trim();
   if (!nombre) return;
   const base = {
@@ -332,114 +477,153 @@ document.getElementById("btnGuardarForm").onclick = () => {
     umbral: Math.max(0, Number(document.getElementById("fUmbral").value) || 0),
     unidad: document.getElementById("fUnidad").value.trim() || "uds",
   };
-  if (editingId) {
-    productos = productos.map(p => p.id === editingId ? { ...p, ...base } : p);
-  } else {
-    productos = [{ id: uid(), ...base }, ...productos];
-  }
-  guardar();
+  productos = editingId
+    ? productos.map(p => p.id === editingId ? { ...p, ...base } : p)
+    : [{ id: uid(), ...base }, ...productos];
+  guardarData();
   cerrarModales();
 };
-
 window.eliminar = (id) => {
+  if (!esPrincipal()) return;
   const p = productos.find(x => x.id === id);
   if (!p || !confirm(`¿Eliminar "${p.nombre}" del inventario?`)) return;
   productos = productos.filter(x => x.id !== id);
-  guardar();
+  guardarData();
 };
 
-// ---- Modal: traslado ----
+// ---------- TRASLADO ----------
 let transferTargetId = null;
 window.abrirTraslado = (id) => {
-  const p = productos.find(x => x.id === id);
-  if (!p) return;
+  if (!esPrincipal()) return;
+  const p = productos.find(x => x.id === id); if (!p) return;
   transferTargetId = id;
-  document.getElementById("traspInfo").textContent =
-    `${p.nombre} · disponible en principal: ${p.stockPrincipal} ${p.unidad}`;
+  document.getElementById("traspInfo").textContent = `${p.nombre} · disponible en principal: ${p.stockPrincipal} ${p.unidad}`;
   document.getElementById("traspCantidad").value = "";
-  document.getElementById("traspCantidad").max = p.stockPrincipal;
   document.getElementById("modalTraslado").classList.add("show");
 };
-
 document.getElementById("btnConfirmarTraslado").onclick = () => {
+  if (!esPrincipal()) return;
   const p = productos.find(x => x.id === transferTargetId);
   const cant = Number(document.getElementById("traspCantidad").value);
   if (!p || !cant || cant <= 0 || cant > p.stockPrincipal) return;
-  productos = productos.map(x => x.id === p.id
-    ? { ...x, stockPrincipal: x.stockPrincipal - cant, stockSecundario: x.stockSecundario + cant }
-    : x);
+  productos = productos.map(x => x.id === p.id ? { ...x, stockPrincipal: x.stockPrincipal - cant, stockSecundario: x.stockSecundario + cant } : x);
   movimientos = [{ id: uid(), fecha: new Date().toISOString(), tipo: "traslado", productoNombre: p.nombre, cantidad: cant, unidad: p.unidad }, ...movimientos];
-  guardar();
+  guardarData();
   cerrarModales();
 };
 
-// ---- Modal: venta ----
-let saleTargetId = null;
-window.abrirVenta = (id) => {
-  const p = productos.find(x => x.id === id);
-  if (!p) return;
-  saleTargetId = id;
-  saleLoc = "principal";
-  document.getElementById("ventaNombre").textContent = p.nombre;
-  document.getElementById("ventaCantidad").value = "";
-  actualizarLocBotones(p);
-  document.getElementById("modalVenta").classList.add("show");
-};
-
-function actualizarLocBotones(p) {
-  const bp = document.getElementById("btnLocPrincipal");
-  const bs = document.getElementById("btnLocSecundario");
-  bp.textContent = `Principal (${p.stockPrincipal})`;
-  bs.textContent = `Segundo punto (${p.stockSecundario})`;
-  bp.className = saleLoc === "principal" ? "sel-principal" : "";
-  bs.className = saleLoc === "secundario" ? "sel-secundario" : "";
+// ---------- PEDIDOS ----------
+let itemsPedidoActual = [];
+function renderItemsPedido() {
+  const cont = document.getElementById("itemsPedido");
+  cont.innerHTML = itemsPedidoActual.map((it, idx) => `
+    <div class="item-row">
+      <div class="field" style="margin-bottom:0;">
+        <label>Producto</label>
+        <select onchange="cambiarItemProducto(${idx}, this.value)">
+          <option value="">Selecciona…</option>
+          ${productos.map(p => `<option value="${p.id}" ${it.productoId === p.id ? "selected" : ""}>${p.nombre}</option>`).join("")}
+        </select>
+      </div>
+      <div class="field" style="margin-bottom:0;">
+        <label>Cantidad</label>
+        <input type="number" min="1" value="${it.cantidad || ""}" onchange="cambiarItemCantidad(${idx}, this.value)" />
+      </div>
+      <button onclick="quitarItem(${idx})" title="Quitar">✕</button>
+    </div>
+  `).join("");
 }
-
-document.getElementById("btnLocPrincipal").onclick = () => {
-  saleLoc = "principal";
-  actualizarLocBotones(productos.find(x => x.id === saleTargetId));
+window.cambiarItemProducto = (idx, productoId) => {
+  const p = productos.find(x => x.id === productoId);
+  itemsPedidoActual[idx].productoId = productoId;
+  itemsPedidoActual[idx].nombre = p ? p.nombre : "";
+  itemsPedidoActual[idx].unidad = p ? p.unidad : "uds";
 };
-document.getElementById("btnLocSecundario").onclick = () => {
-  saleLoc = "secundario";
-  actualizarLocBotones(productos.find(x => x.id === saleTargetId));
-};
+window.cambiarItemCantidad = (idx, val) => { itemsPedidoActual[idx].cantidad = Number(val) || 0; };
+window.quitarItem = (idx) => { itemsPedidoActual.splice(idx, 1); renderItemsPedido(); };
+document.getElementById("btnAddItem").onclick = () => { itemsPedidoActual.push({ productoId: "", nombre: "", cantidad: 1, unidad: "uds" }); renderItemsPedido(); };
 
-document.getElementById("btnConfirmarVenta").onclick = () => {
-  const p = productos.find(x => x.id === saleTargetId);
-  const cant = Number(document.getElementById("ventaCantidad").value);
-  const disponible = saleLoc === "principal" ? p.stockPrincipal : p.stockSecundario;
-  if (!p || !cant || cant <= 0 || cant > disponible) return;
-  productos = productos.map(x => {
-    if (x.id !== p.id) return x;
-    return saleLoc === "principal"
-      ? { ...x, stockPrincipal: x.stockPrincipal - cant }
-      : { ...x, stockSecundario: x.stockSecundario - cant };
-  });
-  movimientos = [{ id: uid(), fecha: new Date().toISOString(), tipo: "venta", productoNombre: p.nombre, cantidad: cant, unidad: p.unidad, ubicacion: saleLoc }, ...movimientos];
-  guardar();
+document.getElementById("btnNuevoPedido").onclick = () => {
+  if (!esPrincipal()) return;
+  ["cNombre","cCedula","cTelefono","cCiudad","cDireccion","cCasaApto","cUnidad","cBarrio"].forEach(id => document.getElementById(id).value = "");
+  itemsPedidoActual = [{ productoId: "", nombre: "", cantidad: 1, unidad: "uds" }];
+  renderItemsPedido();
+  document.getElementById("modalPedido").classList.add("show");
+};
+document.getElementById("btnGuardarPedido").onclick = () => {
+  if (!esPrincipal()) return;
+  const nombre = document.getElementById("cNombre").value.trim();
+  const telefono = document.getElementById("cTelefono").value.trim();
+  const items = itemsPedidoActual.filter(it => it.productoId && it.cantidad > 0);
+  if (!nombre || !telefono || !items.length) { alert("Falta el nombre, el teléfono o al menos un producto con cantidad."); return; }
+  const cliente = {
+    nombre, telefono,
+    cedula: document.getElementById("cCedula").value.trim(),
+    direccion: document.getElementById("cDireccion").value.trim(),
+    casaApto: document.getElementById("cCasaApto").value.trim(),
+    unidad: document.getElementById("cUnidad").value.trim(),
+    barrio: document.getElementById("cBarrio").value.trim(),
+    ciudad: document.getElementById("cCiudad").value.trim(),
+  };
+  const pedido = { id: uid(), fecha: new Date().toISOString(), cliente, items, estado: "pendiente", fechaEntrega: null };
+  pedidos = [pedido, ...pedidos];
+  guardarData();
   cerrarModales();
 };
 
-window.cerrarModales = () => {
-  document.querySelectorAll(".overlay").forEach(o => o.classList.remove("show"));
+window.cancelarPedido = (id) => {
+  if (!esPrincipal()) return;
+  if (!confirm("¿Cancelar este pedido?")) return;
+  pedidos = pedidos.filter(p => p.id !== id);
+  guardarData();
 };
 
+window.marcarEntregado = (id) => {
+  if (!esSecundario()) return;
+  const pedido = pedidos.find(p => p.id === id);
+  if (!pedido) return;
+  const faltantes = pedido.items.filter(it => {
+    const p = productos.find(x => x.id === it.productoId);
+    return !p || p.stockSecundario < it.cantidad;
+  });
+  if (faltantes.length) {
+    alert("No hay stock suficiente en el segundo punto para: " + faltantes.map(f => f.nombre).join(", "));
+    return;
+  }
+  productos = productos.map(p => {
+    const it = pedido.items.find(i => i.productoId === p.id);
+    return it ? { ...p, stockSecundario: p.stockSecundario - it.cantidad } : p;
+  });
+  pedidos = pedidos.map(p => p.id === id ? { ...p, estado: "entregado", fechaEntrega: new Date().toISOString() } : p);
+  movimientos = [{ id: uid(), fecha: new Date().toISOString(), tipo: "entrega", productoNombre: `Pedido de ${pedido.cliente.nombre} (${pedido.items.length} productos)`, cantidad: "", unidad: "" }, ...movimientos];
+  guardarData();
+};
+
+// ---------- FILTROS / MISC ----------
 document.getElementById("btnFiltro").onclick = (e) => {
   soloBajoStock = !soloBajoStock;
   e.target.classList.toggle("active", soloBajoStock);
   e.target.textContent = soloBajoStock ? "Mostrando solo bajo stock" : "Mostrar solo bajo stock";
-  render();
+  renderProductos();
 };
-
+document.getElementById("btnFiltroPedidos").onclick = (e) => {
+  soloPendientes = !soloPendientes;
+  e.target.classList.toggle("active", soloPendientes);
+  e.target.textContent = soloPendientes ? "Mostrando solo pendientes" : "Mostrar solo pendientes";
+  renderPedidos();
+};
 document.getElementById("btnRefresh").onclick = async () => {
-  const snap = await getDoc(ref);
+  const snap = await getDoc(dataRef);
   if (snap.exists()) {
     const data = snap.data();
-    productos = data.productos || [];
-    movimientos = data.movimientos || [];
+    productos = data.productos || []; pedidos = data.pedidos || []; movimientos = data.movimientos || [];
     render();
   }
 };
+window.cerrarModales = () => document.querySelectorAll(".overlay").forEach(o => o.classList.remove("show"));
+
+actualizarBadgeRol();
+requerirRol();
 </script>
 </body>
 </html>
