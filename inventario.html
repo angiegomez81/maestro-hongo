@@ -122,6 +122,10 @@
     </div>
   </div>
 
+  <div id="migrarWrap" style="display:none;margin-bottom:12px;">
+    <button class="btn btn-outline" id="btnMigrar">Migrar datos antiguos (una sola vez)</button>
+  </div>
+
   <div id="errorBanner"></div>
   <div id="alertBanner"></div>
 
@@ -234,7 +238,7 @@ import {
   getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {
-  getFirestore, collection, doc, addDoc, updateDoc, getDoc, onSnapshot, writeBatch
+  getFirestore, collection, doc, addDoc, setDoc, updateDoc, getDoc, onSnapshot, writeBatch
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -332,7 +336,42 @@ function actualizarBadgeRol() {
   else { pill.textContent = "Segundo Punto"; pill.className = "role-pill secundario"; }
   document.getElementById("btnAgregar").style.display = esPrincipal() ? "inline-flex" : "none";
   document.getElementById("btnNuevoPedido").style.display = esPrincipal() ? "inline-flex" : "none";
+  document.getElementById("migrarWrap").style.display = esPrincipal() ? "block" : "none";
 }
+
+document.getElementById("btnMigrar").onclick = async () => {
+  if (!esPrincipal()) return;
+  try {
+    const snap = await getDoc(doc(db, "inventario", "principal"));
+    if (!snap.exists()) { alert("No se encontraron datos antiguos para migrar."); return; }
+    const data = snap.data();
+    let n = 0;
+    for (const p of (data.productos || [])) {
+      await setDoc(doc(db, "productos", p.id), {
+        nombre: p.nombre, sku: p.sku || "", unidad: p.unidad || "uds",
+        stockPrincipal: p.stockPrincipal || 0, stockSecundario: p.stockSecundario || 0,
+        umbral: p.umbral || 0,
+      });
+      n++;
+    }
+    let m = 0;
+    for (const pe of (data.pedidos || [])) {
+      await setDoc(doc(db, "pedidos", pe.id), {
+        cliente: pe.cliente, items: pe.items,
+        estado: pe.estado || "pendiente",
+        puntoEntrega: pe.puntoEntrega || "secundario",
+        formaPago: pe.formaPago || "transferencia",
+        valorCobrar: pe.valorCobrar || 0,
+        fecha: pe.fecha || new Date().toISOString(),
+        fechaEntrega: pe.fechaEntrega || null,
+      });
+      m++;
+    }
+    alert(`Migración completa: ${n} productos y ${m} pedidos copiados.`);
+  } catch (e) {
+    alert("Error al migrar: " + e.message);
+  }
+};
 
 // ---------- TABS ----------
 document.getElementById("tabProductosBtn").onclick = () => setTab("productos");
