@@ -140,7 +140,7 @@
       <button class="btn btn-outline" id="btnFiltro">Mostrar solo bajo stock</button>
       <button class="btn btn-primary" id="btnAgregar">+ Producto</button>
     </div>
-    <div class="table-scroll"><table id="tablaProductos"></table></div>
+    <div class="table-scroll" id="productosContainer"><table id="tablaProductos"></table></div>
   </div>
 
   <!-- TAB PEDIDOS -->
@@ -397,7 +397,7 @@ function render() {
 
 function renderProductos() {
   const lista = soloBajoStock ? productos.filter(bajoStock) : productos;
-  const cont = document.getElementById("tablaProductos").parentElement;
+  const cont = document.getElementById("productosContainer");
   if (!lista.length) {
     cont.innerHTML = `<div class="empty">${productos.length === 0 ? "Todavía no hay productos." : "Ningún producto está en bajo stock."}</div>`;
     return;
