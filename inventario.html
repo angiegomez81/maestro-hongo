@@ -16,7 +16,7 @@
   }
   * { box-sizing: border-box; }
   body { margin:0; background:var(--bg); color:var(--ink); font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 20px 14px 60px; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 20px 14px 60px; }
   h1,h2,h3 { font-family: "Iowan Old Style","Palatino Linotype",Georgia,serif; margin:0; }
   .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
   .header { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
@@ -51,43 +51,63 @@
   .tag.low { background:var(--alert-bg); color:var(--alert); }
   .tag.pendiente { background:var(--secundario-bg); color:var(--secundario); }
   .tag.entregado { background:var(--ok-bg); color:var(--ok); }
+  .tag.cancelado { background:var(--alert-bg); color:var(--alert); }
   .row-btns { display:flex; gap:4px; flex-wrap:wrap; }
   .row-btns button { font-size:11.5px; padding:4px 8px; border-radius:5px; border:1px solid var(--border); background:var(--surface); cursor:pointer; white-space:nowrap; }
   .row-btns button.del { color:var(--alert); }
   .row-btns button:disabled { opacity:.35; cursor:not-allowed; }
   .table-scroll { overflow-x:auto; }
+  .stat-chips { display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap; }
+  .stat-chip { padding:8px 12px; border-radius:6px; font-size:13px; border:1px solid var(--border); background:var(--surface); }
+  .stat-chip b { font-family: ui-monospace, monospace; }
   .pedido-card { background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:14px; margin-bottom:10px; }
   .pedido-top { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; flex-wrap:wrap; }
   .pedido-cliente { font-weight:600; }
   .pedido-meta { font-size:12.5px; color:var(--ink-muted); margin-top:2px; }
   .pedido-items { margin-top:8px; font-size:13px; }
   .pedido-items div { padding:2px 0; }
-  .pedido-actions { margin-top:10px; display:flex; gap:8px; }
+  .pedido-pago { margin-top:8px; font-size:13px; }
+  .cobrar { color:var(--alert); font-weight:600; }
+  .pedido-actions { margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; }
   .footer-note { font-size:12px; color:var(--ink-muted); text-align:center; margin-top:28px; }
   .overlay { position:fixed; inset:0; background:rgba(28,35,33,.5); display:none; align-items:center; justify-content:center; padding:16px; z-index:60; }
   .overlay.show { display:flex; }
   .modal { background:var(--surface); border-radius:8px; padding:20px; width:100%; max-width:420px; max-height:88vh; overflow-y:auto; }
-  .modal.wide { max-width:560px; }
+  .modal.wide { max-width:580px; }
   .modal-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
   .modal-top button { background:none; border:none; cursor:pointer; color:var(--ink-muted); font-size:16px; }
   .field { margin-bottom:10px; }
   .field label { font-size:12px; color:var(--ink-muted); display:block; margin-bottom:2px; }
   .field input, .field select { width:100%; border:1px solid var(--border); border-radius:6px; padding:8px 10px; font-size:14px; }
   .two-col { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-  .loc-toggle { display:flex; gap:8px; margin-bottom:10px; }
-  .loc-toggle button { flex:1; padding:8px; border-radius:6px; border:1px solid var(--border); background:var(--surface); cursor:pointer; font-size:14px; }
-  .loc-toggle button.sel-principal { border-color:var(--principal); background:var(--principal-bg); color:var(--principal); }
-  .loc-toggle button.sel-secundario { border-color:var(--secundario); background:var(--secundario-bg); color:var(--secundario); }
-  .role-choice { display:flex; flex-direction:column; gap:10px; }
-  .role-choice button { padding:14px; border-radius:8px; border:1px solid var(--border); background:var(--surface); font-size:15px; cursor:pointer; text-align:left; }
+  .seg-toggle { display:flex; gap:8px; margin-bottom:10px; }
+  .seg-toggle button { flex:1; padding:8px; border-radius:6px; border:1px solid var(--border); background:var(--surface); cursor:pointer; font-size:14px; }
+  .seg-toggle button.sel-principal { border-color:var(--principal); background:var(--principal-bg); color:var(--principal); }
+  .seg-toggle button.sel-secundario { border-color:var(--secundario); background:var(--secundario-bg); color:var(--secundario); }
   .item-row { display:grid; grid-template-columns: 2fr 1fr auto; gap:6px; align-items:end; margin-bottom:8px; }
   .item-row button { border:1px solid var(--border); background:var(--surface); border-radius:6px; cursor:pointer; padding:8px; color:var(--alert); }
   .add-item-btn { background:none; border:1px dashed var(--border-strong); border-radius:6px; padding:8px; width:100%; cursor:pointer; color:var(--ink-muted); font-size:13px; margin-bottom:10px; }
-  .pin-error { color:var(--alert); font-size:12px; margin-top:4px; display:none; }
+  #loginScreen { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:16px; }
+  .login-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:28px; width:100%; max-width:340px; }
+  .login-error { color:var(--alert); font-size:13px; margin-top:8px; display:none; }
 </style>
 </head>
 <body>
-<div class="wrap">
+
+<!-- PANTALLA DE LOGIN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <h1 style="font-size:20px;margin-bottom:4px;">Inventario Maestro Hongo</h1>
+    <p style="font-size:13px;color:var(--ink-muted);margin:0 0 18px;">Acceso solo para el equipo autorizado</p>
+    <div class="field"><label>Correo</label><input id="loginEmail" type="email" autocomplete="username" /></div>
+    <div class="field"><label>Contraseña</label><input id="loginPass" type="password" autocomplete="current-password" /></div>
+    <button class="btn btn-primary" id="btnLogin" style="width:100%;justify-content:center;">Entrar</button>
+    <div class="login-error" id="loginError">Correo o contraseña incorrectos.</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="wrap" id="app" style="display:none;">
   <div class="header">
     <div>
       <h1 style="font-size:24px;">Inventario compartido</h1>
@@ -96,9 +116,8 @@
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="role-badge">
         <span class="role-pill" id="rolePill"></span>
-        <button class="link-btn" id="btnCambiarRol">cambiar</button>
+        <button class="link-btn" id="btnLogout">cerrar sesión</button>
       </div>
-      <button class="icon-btn" id="btnConfig" title="Configuración" style="display:none;">⚙</button>
       <button class="icon-btn" id="btnRefresh" title="Actualizar">⟳</button>
     </div>
   </div>
@@ -117,48 +136,23 @@
       <button class="btn btn-outline" id="btnFiltro">Mostrar solo bajo stock</button>
       <button class="btn btn-primary" id="btnAgregar">+ Producto</button>
     </div>
-    <div class="table-scroll">
-      <table id="tablaProductos"></table>
-    </div>
+    <div class="table-scroll"><table id="tablaProductos"></table></div>
   </div>
 
   <!-- TAB PEDIDOS -->
   <div id="panelPedidos" style="display:none;">
+    <div class="stat-chips" id="statChips"></div>
     <div class="controls">
-      <button class="btn btn-outline" id="btnFiltroPedidos">Mostrar solo pendientes</button>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn btn-outline" id="btnFiltroPedidos">Mostrar solo pendientes</button>
+        <button class="btn btn-outline" id="btnFiltroMiPunto">Ver solo mi punto</button>
+      </div>
       <button class="btn btn-secondary" id="btnNuevoPedido">+ Nuevo pedido</button>
     </div>
     <div id="listaPedidos"></div>
   </div>
 
   <p class="footer-note" id="statusNote">Conectando…</p>
-</div>
-
-<!-- Overlay: elegir rol / PIN -->
-<div class="overlay" id="overlayRol">
-  <div class="modal">
-    <h3 style="font-size:18px;margin-bottom:12px;">¿Quién eres?</h3>
-    <div class="role-choice" id="roleChoiceButtons">
-      <button data-role="principal">🏢 Punto Principal</button>
-      <button data-role="secundario">📦 Segundo Punto</button>
-    </div>
-    <div id="pinStep" style="display:none;margin-top:14px;">
-      <div class="field"><label id="pinLabel">PIN</label><input id="pinInput" type="password" inputmode="numeric" /></div>
-      <div class="pin-error" id="pinError">PIN incorrecto, intenta de nuevo.</div>
-      <button class="btn btn-primary" id="btnConfirmarPin" style="width:100%;justify-content:center;margin-top:8px;">Entrar</button>
-      <button class="link-btn" id="btnVolverRol" style="margin-top:10px;">← elegir otro</button>
-    </div>
-  </div>
-</div>
-
-<!-- Overlay: configuración de PINs -->
-<div class="overlay" id="overlayConfig">
-  <div class="modal">
-    <div class="modal-top"><h3 style="font-size:18px;">Configuración</h3><button onclick="cerrarModales()">✕</button></div>
-    <div class="field"><label>PIN de Punto Principal</label><input id="cfgPinPrincipal" /></div>
-    <div class="field"><label>PIN de Segundo Punto</label><input id="cfgPinSecundario" /></div>
-    <button class="btn btn-primary" id="btnGuardarConfig" style="width:100%;justify-content:center;">Guardar cambios</button>
-  </div>
 </div>
 
 <!-- Modal producto -->
@@ -189,10 +183,11 @@
   </div>
 </div>
 
-<!-- Modal nuevo pedido -->
+<!-- Modal pedido (nuevo/editar) -->
 <div class="overlay" id="modalPedido">
   <div class="modal wide">
-    <div class="modal-top"><h3 style="font-size:18px;">Nuevo pedido</h3><button onclick="cerrarModales()">✕</button></div>
+    <div class="modal-top"><h3 id="pedidoModalTitle" style="font-size:18px;">Nuevo pedido</h3><button onclick="cerrarModales()">✕</button></div>
+
     <h3 style="font-size:13px;color:var(--ink-muted);margin-bottom:6px;">Datos del cliente</h3>
     <div class="two-col">
       <div class="field"><label>Nombre</label><input id="cNombre" /></div>
@@ -209,17 +204,38 @@
     </div>
     <div class="field"><label>Barrio</label><input id="cBarrio" /></div>
 
+    <h3 style="font-size:13px;color:var(--ink-muted);margin:14px 0 6px;">Entrega y pago</h3>
+    <label style="font-size:12px;color:var(--ink-muted);">¿Qué punto entrega este pedido?</label>
+    <div class="seg-toggle" id="entregaToggle">
+      <button id="btnEntregaPrincipal" data-val="principal">Punto Principal</button>
+      <button id="btnEntregaSecundario" data-val="secundario">Segundo Punto</button>
+    </div>
+    <label style="font-size:12px;color:var(--ink-muted);">Forma de pago</label>
+    <div class="seg-toggle" id="pagoToggle">
+      <button id="btnPagoTransferencia" data-val="transferencia">Transferencia</button>
+      <button id="btnPagoContraentrega" data-val="contra_entrega">Contra entrega</button>
+    </div>
+    <div class="field" id="valorCobrarField" style="display:none;">
+      <label>Valor a cobrar</label>
+      <input id="cValorCobrar" type="number" min="0" placeholder="Ej: 85000" />
+    </div>
+
     <h3 style="font-size:13px;color:var(--ink-muted);margin:14px 0 6px;">Productos</h3>
     <div id="itemsPedido"></div>
     <button class="add-item-btn" id="btnAddItem">+ Agregar producto</button>
 
-    <button class="btn btn-secondary" id="btnGuardarPedido" style="width:100%;justify-content:center;">Registrar pedido</button>
+    <button class="btn btn-secondary" id="btnGuardarPedido" style="width:100%;justify-content:center;">Guardar pedido</button>
   </div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, doc, onSnapshot, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {
+  getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+  getFirestore, collection, doc, addDoc, updateDoc, getDoc, onSnapshot, writeBatch
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDUAXEFVVvoIh4gvHvp0iD0QdLBZ-zOLus",
@@ -230,123 +246,98 @@ const firebaseConfig = {
   appId: "1:617925076909:web:22773a0d73d494a4f82324"
 };
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const db = getFirestore(app);
-const dataRef = doc(db, "inventario", "principal");
-const configRef = doc(db, "inventario", "config");
 
 let productos = [];
 let pedidos = [];
-let movimientos = [];
-let config = { pinPrincipal: "1234", pinSecundario: "5678" };
+let rol = null;
+let currentUid = null;
 let soloBajoStock = false;
 let soloPendientes = false;
-let currentTab = "productos";
-let rol = localStorage.getItem("inv_rol") || null;
+let soloMiPunto = false;
+let entregaSel = "secundario";
+let pagoSel = "transferencia";
 
-const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+const uidTmp = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 const fmtFecha = (iso) => new Date(iso).toLocaleString("es-CO", { day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit" });
+const fmtMoney = (n) => "$" + Number(n || 0).toLocaleString("es-CO");
 const bajoStock = (p) => p.stockPrincipal <= p.umbral || p.stockSecundario <= p.umbral;
 const esPrincipal = () => rol === "principal";
 const esSecundario = () => rol === "secundario";
 
-async function guardarData() {
+// ---------- LOGIN ----------
+document.getElementById("btnLogin").onclick = async () => {
+  const email = document.getElementById("loginEmail").value.trim();
+  const pass = document.getElementById("loginPass").value;
+  document.getElementById("loginError").style.display = "none";
   try {
-    await setDoc(dataRef, { productos, pedidos, movimientos: movimientos.slice(0, 150) });
-    document.getElementById("errorBanner").innerHTML = "";
+    await signInWithEmailAndPassword(auth, email, pass);
   } catch (e) {
-    document.getElementById("errorBanner").innerHTML = `<div class="banner error">No se pudo guardar el cambio. Revisa tu conexión e intenta de nuevo.</div>`;
+    document.getElementById("loginError").style.display = "block";
   }
+};
+document.getElementById("btnLogout").onclick = () => signOut(auth);
+
+let unsubProductos = null, unsubPedidos = null;
+
+onAuthStateChanged(auth, async (user) => {
+  if (unsubProductos) { unsubProductos(); unsubProductos = null; }
+  if (unsubPedidos) { unsubPedidos(); unsubPedidos = null; }
+
+  if (!user) {
+    document.getElementById("loginScreen").style.display = "flex";
+    document.getElementById("app").style.display = "none";
+    rol = null; currentUid = null;
+    return;
+  }
+  currentUid = user.uid;
+  try {
+    const roleSnap = await getDoc(doc(db, "roles", user.uid));
+    if (!roleSnap.exists()) {
+      alert("Tu cuenta no tiene un rol asignado todavía. Contacta al administrador.");
+      await signOut(auth);
+      return;
+    }
+    rol = roleSnap.data().rol;
+  } catch (e) {
+    alert("No se pudo verificar tu rol de acceso.");
+    await signOut(auth);
+    return;
+  }
+
+  document.getElementById("loginScreen").style.display = "none";
+  document.getElementById("app").style.display = "block";
+  actualizarBadgeRol();
+
+  unsubProductos = onSnapshot(collection(db, "productos"), (snap) => {
+    productos = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    document.getElementById("statusNote").textContent = "Este inventario se sincroniza automáticamente entre todos los dispositivos que abran esta página.";
+    render();
+  }, (err) => showError(err));
+
+  unsubPedidos = onSnapshot(collection(db, "pedidos"), (snap) => {
+    pedidos = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    render();
+  }, (err) => showError(err));
+});
+
+function showError(err) {
+  document.getElementById("errorBanner").innerHTML = `<div class="banner error">Error de conexión: ${err.message}</div>`;
 }
 
-onSnapshot(dataRef, (snap) => {
-  const data = snap.exists() ? snap.data() : {};
-  productos = data.productos || [];
-  pedidos = data.pedidos || [];
-  movimientos = data.movimientos || [];
-  document.getElementById("statusNote").textContent = "Este inventario se sincroniza automáticamente entre todos los dispositivos que abran esta página.";
-  render();
-}, (err) => {
-  document.getElementById("errorBanner").innerHTML = `<div class="banner error">Error de conexión: ${err.message}</div>`;
-});
-
-onSnapshot(configRef, async (snap) => {
-  if (snap.exists()) {
-    config = snap.data();
-  } else {
-    await setDoc(configRef, config);
-  }
-});
-
-// ---------- ROL ----------
 function actualizarBadgeRol() {
   const pill = document.getElementById("rolePill");
   if (rol === "principal") { pill.textContent = "Punto Principal"; pill.className = "role-pill principal"; }
-  else if (rol === "secundario") { pill.textContent = "Segundo Punto"; pill.className = "role-pill secundario"; }
-  else { pill.textContent = "Sin rol"; pill.className = "role-pill"; }
-  document.getElementById("btnConfig").style.display = esPrincipal() ? "inline-flex" : "none";
+  else { pill.textContent = "Segundo Punto"; pill.className = "role-pill secundario"; }
+  document.getElementById("btnAgregar").style.display = esPrincipal() ? "inline-flex" : "none";
+  document.getElementById("btnNuevoPedido").style.display = esPrincipal() ? "inline-flex" : "none";
 }
-
-function requerirRol() {
-  if (!rol) document.getElementById("overlayRol").classList.add("show");
-}
-
-let rolPendiente = null;
-document.querySelectorAll("#roleChoiceButtons button").forEach(btn => {
-  btn.onclick = () => {
-    rolPendiente = btn.dataset.role;
-    document.getElementById("pinStep").style.display = "block";
-    document.getElementById("pinLabel").textContent = rolPendiente === "principal" ? "PIN de Punto Principal" : "PIN de Segundo Punto";
-    document.getElementById("pinInput").value = "";
-    document.getElementById("pinError").style.display = "none";
-    document.getElementById("pinInput").focus();
-  };
-});
-document.getElementById("btnVolverRol").onclick = () => {
-  document.getElementById("pinStep").style.display = "none";
-  rolPendiente = null;
-};
-document.getElementById("btnConfirmarPin").onclick = () => {
-  const val = document.getElementById("pinInput").value;
-  const correcto = rolPendiente === "principal" ? config.pinPrincipal : config.pinSecundario;
-  if (val === correcto) {
-    rol = rolPendiente;
-    localStorage.setItem("inv_rol", rol);
-    document.getElementById("overlayRol").classList.remove("show");
-    actualizarBadgeRol();
-    render();
-  } else {
-    document.getElementById("pinError").style.display = "block";
-  }
-};
-document.getElementById("btnCambiarRol").onclick = () => {
-  rol = null;
-  localStorage.removeItem("inv_rol");
-  actualizarBadgeRol();
-  document.getElementById("pinStep").style.display = "none";
-  document.getElementById("overlayRol").classList.add("show");
-  render();
-};
-
-// ---------- CONFIG (solo principal) ----------
-document.getElementById("btnConfig").onclick = () => {
-  document.getElementById("cfgPinPrincipal").value = config.pinPrincipal;
-  document.getElementById("cfgPinSecundario").value = config.pinSecundario;
-  document.getElementById("overlayConfig").classList.add("show");
-};
-document.getElementById("btnGuardarConfig").onclick = async () => {
-  const p = document.getElementById("cfgPinPrincipal").value.trim();
-  const s = document.getElementById("cfgPinSecundario").value.trim();
-  if (!p || !s) return;
-  config = { pinPrincipal: p, pinSecundario: s };
-  await setDoc(configRef, config);
-  cerrarModales();
-};
 
 // ---------- TABS ----------
 document.getElementById("tabProductosBtn").onclick = () => setTab("productos");
 document.getElementById("tabPedidosBtn").onclick = () => setTab("pedidos");
 function setTab(t) {
-  currentTab = t;
   document.getElementById("tabProductosBtn").classList.toggle("active", t === "productos");
   document.getElementById("tabPedidosBtn").classList.toggle("active", t === "pedidos");
   document.getElementById("panelProductos").style.display = t === "productos" ? "block" : "none";
@@ -355,38 +346,25 @@ function setTab(t) {
 
 // ---------- RENDER ----------
 function render() {
-  actualizarBadgeRol();
-  document.getElementById("btnAgregar").disabled = !esPrincipal();
-  document.getElementById("btnNuevoPedido").disabled = !esPrincipal();
-
   const alertas = productos.filter(bajoStock);
   document.getElementById("alertBanner").innerHTML = alertas.length ? `
     <div class="banner alert">
       <div class="title">⚠ ${alertas.length} producto${alertas.length !== 1 ? "s" : ""} en bajo stock</div>
       <div>${alertas.map(a => a.nombre).join(" · ")}</div>
     </div>` : "";
-
   renderProductos();
   renderPedidos();
 }
 
 function renderProductos() {
   const lista = soloBajoStock ? productos.filter(bajoStock) : productos;
-  const tabla = document.getElementById("tablaProductos");
+  const cont = document.getElementById("tablaProductos").parentElement;
   if (!lista.length) {
-    tabla.outerHTML = `<div class="empty" id="tablaProductos">${productos.length === 0 ? "Todavía no hay productos." : "Ningún producto está en bajo stock."}</div>`;
+    cont.innerHTML = `<div class="empty">${productos.length === 0 ? "Todavía no hay productos." : "Ningún producto está en bajo stock."}</div>`;
     return;
   }
-  if (tabla.tagName !== "TABLE") {
-    const t = document.createElement("table");
-    t.id = "tablaProductos";
-    tabla.replaceWith(t);
-  }
-  const t = document.getElementById("tablaProductos");
-  t.innerHTML = `
-    <thead><tr>
-      <th>Nombre</th><th>SKU</th><th>Unidad</th><th>Stock principal</th><th>Stock segundo</th><th>Alerta</th><th>Acciones</th>
-    </tr></thead>
+  cont.innerHTML = `<table id="tablaProductos">
+    <thead><tr><th>Nombre</th><th>SKU</th><th>Unidad</th><th>Stock principal</th><th>Stock segundo</th><th>Alerta</th><th>Acciones</th></tr></thead>
     <tbody>
       ${lista.map(p => `
         <tr class="${bajoStock(p) ? "low" : ""}">
@@ -396,50 +374,60 @@ function renderProductos() {
           <td class="mono">${p.stockPrincipal}</td>
           <td class="mono">${p.stockSecundario}</td>
           <td class="mono">${p.umbral}</td>
-          <td>
-            <div class="row-btns">
-              <button onclick="abrirEditar('${p.id}')" ${esPrincipal() ? "" : "disabled"}>Editar</button>
-              <button onclick="abrirTraslado('${p.id}')" ${esPrincipal() ? "" : "disabled"}>Trasladar</button>
-              <button class="del" onclick="eliminar('${p.id}')" ${esPrincipal() ? "" : "disabled"}>Eliminar</button>
-            </div>
-          </td>
-        </tr>
-      `).join("")}
-    </tbody>`;
+          <td><div class="row-btns">
+            <button onclick="abrirEditar('${p.id}')" ${esPrincipal() ? "" : "disabled"}>Editar</button>
+            <button onclick="abrirTraslado('${p.id}')" ${esPrincipal() ? "" : "disabled"}>Trasladar</button>
+          </div></td>
+        </tr>`).join("")}
+    </tbody></table>`;
 }
 
 function renderPedidos() {
-  const lista = soloPendientes ? pedidos.filter(p => p.estado === "pendiente") : pedidos;
+  const pendPrincipal = pedidos.filter(p => p.estado === "pendiente" && p.puntoEntrega === "principal").length;
+  const pendSecundario = pedidos.filter(p => p.estado === "pendiente" && p.puntoEntrega === "secundario").length;
+  document.getElementById("statChips").innerHTML = `
+    <div class="stat-chip">Pendientes Punto Principal: <b>${pendPrincipal}</b></div>
+    <div class="stat-chip">Pendientes Segundo Punto: <b>${pendSecundario}</b></div>
+  `;
+
+  let lista = pedidos;
+  if (soloPendientes) lista = lista.filter(p => p.estado === "pendiente");
+  if (soloMiPunto) lista = lista.filter(p => p.puntoEntrega === rol);
   const cont = document.getElementById("listaPedidos");
   if (!lista.length) {
-    cont.innerHTML = `<div class="empty">${pedidos.length === 0 ? "Todavía no hay pedidos registrados." : "No hay pedidos pendientes."}</div>`;
+    cont.innerHTML = `<div class="empty">${pedidos.length === 0 ? "Todavía no hay pedidos registrados." : "No hay pedidos que coincidan con el filtro."}</div>`;
     return;
   }
   const ordenados = [...lista].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
-  cont.innerHTML = ordenados.map(pe => `
+  cont.innerHTML = ordenados.map(pe => {
+    const puedeEntregar = pe.estado === "pendiente" && rol === pe.puntoEntrega;
+    const puedeEditar = esPrincipal() && pe.estado === "pendiente";
+    return `
     <div class="pedido-card">
       <div class="pedido-top">
         <div>
-          <div class="pedido-cliente">${pe.cliente.nombre} <span class="tag ${pe.estado}">${pe.estado}</span></div>
+          <div class="pedido-cliente">${pe.cliente.nombre} <span class="tag ${pe.estado}">${pe.estado}</span> <span class="tag">${pe.puntoEntrega === "principal" ? "Entrega: Principal" : "Entrega: Segundo Punto"}</span></div>
           <div class="pedido-meta">${pe.cliente.telefono || "—"} · CC ${pe.cliente.cedula || "—"}</div>
           <div class="pedido-meta">${pe.cliente.direccion || ""} ${pe.cliente.casaApto || ""} · ${pe.cliente.unidad || ""} · ${pe.cliente.barrio || ""}, ${pe.cliente.ciudad || ""}</div>
           <div class="pedido-meta mono">${fmtFecha(pe.fecha)}${pe.fechaEntrega ? " · entregado " + fmtFecha(pe.fechaEntrega) : ""}</div>
         </div>
       </div>
-      <div class="pedido-items">
-        ${pe.items.map(it => `<div>• ${it.cantidad} ${it.unidad} — ${it.nombre}</div>`).join("")}
+      <div class="pedido-items">${pe.items.map(it => `<div>• ${it.cantidad} ${it.unidad} — ${it.nombre}</div>`).join("")}</div>
+      <div class="pedido-pago">
+        ${pe.formaPago === "contra_entrega"
+          ? `Pago: Contra entrega · <span class="cobrar">Cobrar ${fmtMoney(pe.valorCobrar)}</span>`
+          : "Pago: Transferencia"}
       </div>
       <div class="pedido-actions">
-        ${pe.estado === "pendiente"
-          ? `<button class="btn btn-primary" onclick="marcarEntregado('${pe.id}')" ${esSecundario() ? "" : "disabled"}>Marcar como entregado</button>
-             <button class="btn btn-outline" onclick="cancelarPedido('${pe.id}')" ${esPrincipal() ? "" : "disabled"}>Cancelar pedido</button>`
-          : ""}
+        ${puedeEntregar ? `<button class="btn btn-primary" onclick="marcarEntregado('${pe.id}')">Marcar como entregado</button>` : ""}
+        ${puedeEditar ? `<button class="btn btn-outline" onclick="abrirEditarPedido('${pe.id}')">Editar</button>
+                          <button class="btn btn-outline" onclick="cancelarPedido('${pe.id}')">Cancelar pedido</button>` : ""}
       </div>
-    </div>
-  `).join("");
+    </div>`;
+  }).join("");
 }
 
-// ---------- PRODUCTOS: agregar/editar ----------
+// ---------- PRODUCTOS ----------
 let editingId = null;
 window.abrirEditar = (id) => {
   if (!esPrincipal()) return;
@@ -465,7 +453,7 @@ document.getElementById("btnAgregar").onclick = () => {
   document.getElementById("fUnidad").value = "uds";
   document.getElementById("modalForm").classList.add("show");
 };
-document.getElementById("btnGuardarForm").onclick = () => {
+document.getElementById("btnGuardarForm").onclick = async () => {
   if (!esPrincipal()) return;
   const nombre = document.getElementById("fNombre").value.trim();
   if (!nombre) return;
@@ -477,18 +465,11 @@ document.getElementById("btnGuardarForm").onclick = () => {
     umbral: Math.max(0, Number(document.getElementById("fUmbral").value) || 0),
     unidad: document.getElementById("fUnidad").value.trim() || "uds",
   };
-  productos = editingId
-    ? productos.map(p => p.id === editingId ? { ...p, ...base } : p)
-    : [{ id: uid(), ...base }, ...productos];
-  guardarData();
-  cerrarModales();
-};
-window.eliminar = (id) => {
-  if (!esPrincipal()) return;
-  const p = productos.find(x => x.id === id);
-  if (!p || !confirm(`¿Eliminar "${p.nombre}" del inventario?`)) return;
-  productos = productos.filter(x => x.id !== id);
-  guardarData();
+  try {
+    if (editingId) await updateDoc(doc(db, "productos", editingId), base);
+    else await addDoc(collection(db, "productos"), base);
+    cerrarModales();
+  } catch (e) { showError(e); }
 };
 
 // ---------- TRASLADO ----------
@@ -501,19 +482,40 @@ window.abrirTraslado = (id) => {
   document.getElementById("traspCantidad").value = "";
   document.getElementById("modalTraslado").classList.add("show");
 };
-document.getElementById("btnConfirmarTraslado").onclick = () => {
+document.getElementById("btnConfirmarTraslado").onclick = async () => {
   if (!esPrincipal()) return;
   const p = productos.find(x => x.id === transferTargetId);
   const cant = Number(document.getElementById("traspCantidad").value);
   if (!p || !cant || cant <= 0 || cant > p.stockPrincipal) return;
-  productos = productos.map(x => x.id === p.id ? { ...x, stockPrincipal: x.stockPrincipal - cant, stockSecundario: x.stockSecundario + cant } : x);
-  movimientos = [{ id: uid(), fecha: new Date().toISOString(), tipo: "traslado", productoNombre: p.nombre, cantidad: cant, unidad: p.unidad }, ...movimientos];
-  guardarData();
-  cerrarModales();
+  try {
+    await updateDoc(doc(db, "productos", p.id), {
+      stockPrincipal: p.stockPrincipal - cant,
+      stockSecundario: p.stockSecundario + cant,
+    });
+    cerrarModales();
+  } catch (e) { showError(e); }
 };
 
-// ---------- PEDIDOS ----------
+// ---------- PEDIDOS: crear/editar ----------
 let itemsPedidoActual = [];
+let editingPedidoId = null;
+
+function setEntregaSel(v) {
+  entregaSel = v;
+  document.getElementById("btnEntregaPrincipal").className = v === "principal" ? "sel-principal" : "";
+  document.getElementById("btnEntregaSecundario").className = v === "secundario" ? "sel-secundario" : "";
+}
+function setPagoSel(v) {
+  pagoSel = v;
+  document.getElementById("btnPagoTransferencia").className = v === "transferencia" ? "sel-principal" : "";
+  document.getElementById("btnPagoContraentrega").className = v === "contra_entrega" ? "sel-secundario" : "";
+  document.getElementById("valorCobrarField").style.display = v === "contra_entrega" ? "block" : "none";
+}
+document.getElementById("btnEntregaPrincipal").onclick = () => setEntregaSel("principal");
+document.getElementById("btnEntregaSecundario").onclick = () => setEntregaSel("secundario");
+document.getElementById("btnPagoTransferencia").onclick = () => setPagoSel("transferencia");
+document.getElementById("btnPagoContraentrega").onclick = () => setPagoSel("contra_entrega");
+
 function renderItemsPedido() {
   const cont = document.getElementById("itemsPedido");
   cont.innerHTML = itemsPedidoActual.map((it, idx) => `
@@ -530,8 +532,7 @@ function renderItemsPedido() {
         <input type="number" min="1" value="${it.cantidad || ""}" onchange="cambiarItemCantidad(${idx}, this.value)" />
       </div>
       <button onclick="quitarItem(${idx})" title="Quitar">✕</button>
-    </div>
-  `).join("");
+    </div>`).join("");
 }
 window.cambiarItemProducto = (idx, productoId) => {
   const p = productos.find(x => x.id === productoId);
@@ -545,17 +546,47 @@ document.getElementById("btnAddItem").onclick = () => { itemsPedidoActual.push({
 
 document.getElementById("btnNuevoPedido").onclick = () => {
   if (!esPrincipal()) return;
-  ["cNombre","cCedula","cTelefono","cCiudad","cDireccion","cCasaApto","cUnidad","cBarrio"].forEach(id => document.getElementById(id).value = "");
+  editingPedidoId = null;
+  document.getElementById("pedidoModalTitle").textContent = "Nuevo pedido";
+  ["cNombre","cCedula","cTelefono","cCiudad","cDireccion","cCasaApto","cUnidad","cBarrio","cValorCobrar"].forEach(id => document.getElementById(id).value = "");
   itemsPedidoActual = [{ productoId: "", nombre: "", cantidad: 1, unidad: "uds" }];
   renderItemsPedido();
+  setEntregaSel("secundario");
+  setPagoSel("transferencia");
   document.getElementById("modalPedido").classList.add("show");
 };
-document.getElementById("btnGuardarPedido").onclick = () => {
+
+window.abrirEditarPedido = (id) => {
+  if (!esPrincipal()) return;
+  const pe = pedidos.find(p => p.id === id); if (!pe) return;
+  editingPedidoId = id;
+  document.getElementById("pedidoModalTitle").textContent = "Editar pedido";
+  document.getElementById("cNombre").value = pe.cliente.nombre || "";
+  document.getElementById("cCedula").value = pe.cliente.cedula || "";
+  document.getElementById("cTelefono").value = pe.cliente.telefono || "";
+  document.getElementById("cCiudad").value = pe.cliente.ciudad || "";
+  document.getElementById("cDireccion").value = pe.cliente.direccion || "";
+  document.getElementById("cCasaApto").value = pe.cliente.casaApto || "";
+  document.getElementById("cUnidad").value = pe.cliente.unidad || "";
+  document.getElementById("cBarrio").value = pe.cliente.barrio || "";
+  document.getElementById("cValorCobrar").value = pe.valorCobrar || "";
+  itemsPedidoActual = pe.items.map(it => ({ ...it }));
+  renderItemsPedido();
+  setEntregaSel(pe.puntoEntrega);
+  setPagoSel(pe.formaPago);
+  document.getElementById("modalPedido").classList.add("show");
+};
+
+document.getElementById("btnGuardarPedido").onclick = async () => {
   if (!esPrincipal()) return;
   const nombre = document.getElementById("cNombre").value.trim();
   const telefono = document.getElementById("cTelefono").value.trim();
   const items = itemsPedidoActual.filter(it => it.productoId && it.cantidad > 0);
   if (!nombre || !telefono || !items.length) { alert("Falta el nombre, el teléfono o al menos un producto con cantidad."); return; }
+  if (pagoSel === "contra_entrega" && !Number(document.getElementById("cValorCobrar").value)) {
+    alert("Ingresa el valor a cobrar para el pago contra entrega.");
+    return;
+  }
   const cliente = {
     nombre, telefono,
     cedula: document.getElementById("cCedula").value.trim(),
@@ -565,41 +596,52 @@ document.getElementById("btnGuardarPedido").onclick = () => {
     barrio: document.getElementById("cBarrio").value.trim(),
     ciudad: document.getElementById("cCiudad").value.trim(),
   };
-  const pedido = { id: uid(), fecha: new Date().toISOString(), cliente, items, estado: "pendiente", fechaEntrega: null };
-  pedidos = [pedido, ...pedidos];
-  guardarData();
-  cerrarModales();
+  const payload = {
+    cliente, items,
+    puntoEntrega: entregaSel,
+    formaPago: pagoSel,
+    valorCobrar: pagoSel === "contra_entrega" ? Number(document.getElementById("cValorCobrar").value) : 0,
+  };
+  try {
+    if (editingPedidoId) {
+      await updateDoc(doc(db, "pedidos", editingPedidoId), payload);
+    } else {
+      await addDoc(collection(db, "pedidos"), { ...payload, estado: "pendiente", fecha: new Date().toISOString(), fechaEntrega: null });
+    }
+    cerrarModales();
+  } catch (e) { showError(e); }
 };
 
-window.cancelarPedido = (id) => {
+window.cancelarPedido = async (id) => {
   if (!esPrincipal()) return;
   if (!confirm("¿Cancelar este pedido?")) return;
-  pedidos = pedidos.filter(p => p.id !== id);
-  guardarData();
+  try { await updateDoc(doc(db, "pedidos", id), { estado: "cancelado" }); } catch (e) { showError(e); }
 };
 
-window.marcarEntregado = (id) => {
-  if (!esSecundario()) return;
+window.marcarEntregado = async (id) => {
   const pedido = pedidos.find(p => p.id === id);
-  if (!pedido) return;
+  if (!pedido || rol !== pedido.puntoEntrega) return;
+  const campoStock = pedido.puntoEntrega === "principal" ? "stockPrincipal" : "stockSecundario";
   const faltantes = pedido.items.filter(it => {
     const p = productos.find(x => x.id === it.productoId);
-    return !p || p.stockSecundario < it.cantidad;
+    return !p || p[campoStock] < it.cantidad;
   });
   if (faltantes.length) {
-    alert("No hay stock suficiente en el segundo punto para: " + faltantes.map(f => f.nombre).join(", "));
+    alert("No hay stock suficiente en tu punto para: " + faltantes.map(f => f.nombre).join(", "));
     return;
   }
-  productos = productos.map(p => {
-    const it = pedido.items.find(i => i.productoId === p.id);
-    return it ? { ...p, stockSecundario: p.stockSecundario - it.cantidad } : p;
-  });
-  pedidos = pedidos.map(p => p.id === id ? { ...p, estado: "entregado", fechaEntrega: new Date().toISOString() } : p);
-  movimientos = [{ id: uid(), fecha: new Date().toISOString(), tipo: "entrega", productoNombre: `Pedido de ${pedido.cliente.nombre} (${pedido.items.length} productos)`, cantidad: "", unidad: "" }, ...movimientos];
-  guardarData();
+  try {
+    const batch = writeBatch(db);
+    pedido.items.forEach(it => {
+      const p = productos.find(x => x.id === it.productoId);
+      if (p) batch.update(doc(db, "productos", p.id), { [campoStock]: p[campoStock] - it.cantidad });
+    });
+    batch.update(doc(db, "pedidos", id), { estado: "entregado", fechaEntrega: new Date().toISOString() });
+    await batch.commit();
+  } catch (e) { showError(e); }
 };
 
-// ---------- FILTROS / MISC ----------
+// ---------- FILTROS ----------
 document.getElementById("btnFiltro").onclick = (e) => {
   soloBajoStock = !soloBajoStock;
   e.target.classList.toggle("active", soloBajoStock);
@@ -612,18 +654,14 @@ document.getElementById("btnFiltroPedidos").onclick = (e) => {
   e.target.textContent = soloPendientes ? "Mostrando solo pendientes" : "Mostrar solo pendientes";
   renderPedidos();
 };
-document.getElementById("btnRefresh").onclick = async () => {
-  const snap = await getDoc(dataRef);
-  if (snap.exists()) {
-    const data = snap.data();
-    productos = data.productos || []; pedidos = data.pedidos || []; movimientos = data.movimientos || [];
-    render();
-  }
+document.getElementById("btnFiltroMiPunto").onclick = (e) => {
+  soloMiPunto = !soloMiPunto;
+  e.target.classList.toggle("active", soloMiPunto);
+  e.target.textContent = soloMiPunto ? "Viendo solo mi punto" : "Ver solo mi punto";
+  renderPedidos();
 };
+document.getElementById("btnRefresh").onclick = () => render();
 window.cerrarModales = () => document.querySelectorAll(".overlay").forEach(o => o.classList.remove("show"));
-
-actualizarBadgeRol();
-requerirRol();
 </script>
 </body>
 </html>
